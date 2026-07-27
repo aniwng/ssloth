@@ -1,0 +1,18 @@
+---
+import ProductImage from './ProductImage.astro'
+import {formatMonth} from '../lib/roundups.js'
+
+const {roundup} = Astro.props
+const updated = formatMonth(roundup.updatedAt ?? roundup.publishedAt)
+---
+
+<a class={`card cat-${roundup.category}`} href={`/${roundup.slug}/`}>
+  <div class={roundup.heroImage ? 'card-img' : 'card-img ph'}>
+    <ProductImage source={roundup.heroImage} width={640} height={340} alt={roundup.title} />
+  </div>
+  <div class="card-body">
+    <span class={`tag ${roundup.category}`}>{roundup.category}</span>
+    <div class="card-title">{roundup.title}</div>
+    {updated && <div class="card-meta">updated {updated}</div>}
+  </div>
+</a>

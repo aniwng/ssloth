@@ -1,0 +1,21 @@
+node_modules/
+dist/
+.astro/
+.output/
+.vercel/
+.netlify/
+
+.env
+.env.*
+!.env.example
+
+# Sanity Studio build output
+sloth-astro-sanity/sanity/dist/
+
+# Dry-run drafts
+sloth-astro-sanity/scripts/out/*
+!sloth-astro-sanity/scripts/out/.gitkeep
+
+.DS_Store
+*.log
+npm-debug.log*

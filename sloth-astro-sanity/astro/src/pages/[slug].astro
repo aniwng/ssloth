@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PawIcon from '../components/PawIcon.astro'
+import ProductImage from '../components/ProductImage.astro'
+import {getRoundups, introToHtml, formatMonth} from '../lib/roundups.js'
+
+// ONE template for every roundup. New Sanity documents become new pages
+// automatically. If you ever find yourself creating article-2.astro, the
+// pattern has broken — fix it here instead of adding a file.
+export async function getStaticPaths() {
+  const roundups = await getRoundups()
+  return roundups.map((roundup) => ({params: {slug: roundup.slug}, props: {roundup}}))
+}
+
+const {roundup} = Astro.props
+const intro = introToHtml(roundup.intro)
+const updated = formatMonth(roundup.updatedAt ?? roundup.publishedAt)
+const products = [...(roundup.products ?? [])].sort((a, b) => a.rank - b.rank)
+const meta = [updated && `updated ${updated}`, roundup.readingMinutes && `${roundup.readingMinutes} min read`]
+  .filter(Boolean)
+  .join(' · ')
+---
+
+<BaseLayout title={`${roundup.title} — Shopping Sloth`}>
+  <div class={`wrap cat-${roundup.category}`}>
+    <div class="article-head">
+      <span class={`tag ${roundup.category}`}>{roundup.category}</span>
+      <h1>{roundup.title}</h1>
+      <div class="article-meta">{meta}</div>
+    </div>
+
+    <div class={roundup.heroImage ? 'article-hero' : 'article-hero ph'}>
+      <ProductImage source={roundup.heroImage} width={1400} height={440} alt={roundup.title} />
+    </div>
+
+    <div class="intro" set:html={intro} />
+
+    {
+      roundup.ranked !== false ? (
+        <div class="rankings">
+          {products.map((product) => (
+            <div class={product.isEditorsPick ? 'entry pick' : 'entry'}>
+              <div class="rank-num">{product.rank}</div>
+              <div class="entry-thumb ph">
+                <ProductImage source={product.image} width={200} height={200} alt={product.name} />
+              </div>
+              <div>
+                {product.isEditorsPick && (
+                  <div class="pick-flag">
+                    <PawIcon size={11} />
+                    editor's pick
+                  </div>
+                )}
+                <div class="entry-name">{product.name}</div>
+                <div class="entry-sub">{product.subtitle}</div>
+              </div>
+              <a
+                class={product.isEditorsPick ? 'btn' : 'btn btn-secondary'}
+                href={product.affiliateUrl || '#'}
+                rel="nofollow sponsored noopener"
+                target={product.affiliateUrl && product.affiliateUrl !== '#' ? '_blank' : undefined}
+              >
+                buy now
+              </a>
+              <p class="entry-copy">{product.blurb}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        // Unranked: no rank badge, no editor's pick, no per-item buy button —
+        // for articles about product *categories* rather than one named
+        // winner. See CLAUDE.md's "unranked guide" decision.
+        <div class="list">
+          {products.map((product) => (
+            <div class="list-item">
+              <div class="list-name">{product.name}</div>
+              <div class="entry-sub">{product.subtitle}</div>
+              <p class="entry-copy">{product.blurb}</p>
+              {product.examples && (
+                <p class="list-examples">
+                  <strong>popular picks:</strong> {product.examples}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      roundup.stateDates?.length > 0 && (
+        <div class="state-dates">
+          <h2>which states, and when</h2>
+          {roundup.stateDates.map((row) => (
+            <div class="state-date-row">
+              <span class="state-date-state">{row.state}</span>
+              <span class="state-date-dates">{row.dates}</span>
+              {row.note && <span class="state-date-note">{row.note}</span>}
+            </div>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      roundup.buyingTips && (
+        <div class="tips">
+          <h2>quick buying tips</h2>
+          <p>{roundup.buyingTips}</p>
+        </div>
+      )
+    }
+
+    {
+      roundup.ranked !== false && (
+        <p class="disclosure">
+          Some links above are affiliate links. If you buy through them we may earn a small commission,
+          at no extra cost to you. Commissions never influence our picks.
+        </p>
+      )
+    }
+
+    {
+      roundup.pullQuote && (
+        <div class="quote" style="margin-bottom:56px;">
+          <p>"{roundup.pullQuote}"</p>
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>

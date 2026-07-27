@@ -1,0 +1,355 @@
+[
+  {
+    "_id": "seed-sunscreens-body-2026",
+    "title": "Top 5 Sunscreens for Your Body in 2026",
+    "slug": "top-5-sunscreens-for-your-body-in-2026",
+    "category": "beauty",
+    "publishedAt": "2026-07-14T09:00:00.000Z",
+    "updatedAt": "2026-07-14T09:00:00.000Z",
+    "readingMinutes": 6,
+    "intro": [
+      {
+        "_type": "block",
+        "_key": "intro1",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "_key": "intro1a",
+            "text": "If you only reach for sunscreen on beach days, your skin is missing out. Dermatologists recommend daily broad-spectrum protection on every exposed inch of skin, not just your face."
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "_key": "intro2",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "_key": "intro2a",
+            "text": "Every pick here is checked against testing data and reviews from sources like Consumer Reports and CNN Underscored before it makes the list. No rush, just really good picks."
+          }
+        ]
+      }
+    ],
+    "heroImage": "/images/sunscreens-hero.jpg",
+    "products": [
+      {
+        "rank": 1,
+        "name": "Banana Boat Light As Air SPF 50",
+        "subtitle": "best overall body sunscreen",
+        "blurb": "This one has become a favorite among testers for feeling almost weightless on skin. It goes on with a matte finish and blends in cleanly across a range of skin tones without leaving the chalky white cast that plagues so many sunscreens.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": true
+      },
+      {
+        "rank": 2,
+        "name": "Thrive Reef Safe Sunscreen SPF 50",
+        "subtitle": "best reef-safe mineral sunscreen",
+        "blurb": "If you spend time in the ocean or just want a simple ingredient list, this mineral formula relies on mineral UV filters rather than chemical ones, making it gentler for sensitive skin and reef-conscious for swimmers.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 3,
+        "name": "Sōl Labs Face and Body Sunscreen",
+        "subtitle": "best all-around performer",
+        "blurb": "Few sunscreens check every box dermatologists look for, but this one comes close: broad-spectrum coverage, water resistance, and reef-safe ingredients, all in one bottle for both face and body.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 4,
+        "name": "Coola Classic Body Sunscreen SPF 30",
+        "subtitle": "best for dry or sensitive skin",
+        "blurb": "This one leans into a lotion-like feel rather than a typical sunscreen texture, doubling as a light moisturizer with plant-derived antioxidants like raspberry seed and prickly pear extract.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 5,
+        "name": "Coppertone Pure & Simple Mineral SPF 50",
+        "subtitle": "best for sensitive skin",
+        "blurb": "Built around zinc oxide, this fragrance-free formula skips common irritants like oxybenzone and parabens, a good option if you've reacted to chemical sunscreens before.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": false
+      }
+    ],
+    "buyingTips": "SPF 30+ is the general minimum for daily protection. Mineral sunscreens sit on top of skin and suit sensitive types; chemical sunscreens absorb in and often feel lighter. Reapply every 2 hours outdoors, or right after swimming or heavy sweating.",
+    "pullQuote": "Still deciding? That's fine. We already did the slow part."
+  },
+  {
+    "_id": "seed-backpacks-back-to-school-2026",
+    "title": "Top 5 Backpacks for Back to School in 2026",
+    "slug": "top-5-backpacks-for-back-to-school-in-2026",
+    "category": "accessories",
+    "publishedAt": "2026-07-26T09:00:00.000Z",
+    "updatedAt": "2026-07-26T09:00:00.000Z",
+    "readingMinutes": 5,
+    "intro": [
+      {
+        "_type": "block",
+        "_key": "intro1",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "_key": "intro1a",
+            "text": "A backpack has to survive a full school year of being dropped, overstuffed, and dragged across campus — the bag that looks best on day one isn't always the one still holding together in May."
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "_key": "intro2",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "_key": "intro2a",
+            "text": "Every pick here is checked against reviews and testing data from sources like NBC Select, CNN Underscored, and Reviewed before it makes the list. No rush, just really good picks."
+          }
+        ]
+      }
+    ],
+    "heroImage": "/images/backpacks-hero.jpg",
+    "products": [
+      {
+        "rank": 1,
+        "name": "The North Face Borealis",
+        "subtitle": "best dual-purpose backpack",
+        "blurb": "This one holds up to both classroom routines and weekend hikes, with a stand-up shape, a padded laptop sleeve, and a removable waist strap for longer treks. Owners several years in report it's still holding together, which says more than any first-week impression can.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": true
+      },
+      {
+        "rank": 2,
+        "name": "JanSport Main Campus",
+        "subtitle": "best classic pick",
+        "blurb": "A 32-liter main compartment and a dedicated organizer panel make this an easy fit for anyone who'd rather not think about where things go. It's been a reliable, unglamorous default for decades, and it still is.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 3,
+        "name": "Fjällräven Kanken Laptop 17\"",
+        "subtitle": "best for standing out",
+        "blurb": "The boxy silhouette and padded 17-inch laptop sleeve make this one of the few backpacks that reads as a style choice rather than just a container. It costs more than the others here and comes in fewer colors, but the tradeoff is a bag people actually notice.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 4,
+        "name": "lululemon Everyday Backpack 21L",
+        "subtitle": "best for a grown-up look",
+        "blurb": "Water-repellent fabric and a clean, unbranded-looking shape mean this one transitions from high school hallways to an internship without looking out of place either way. Multiple interior pockets keep it organized without the bulk of a bigger bag.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 5,
+        "name": "Matein Extra Large Backpack",
+        "subtitle": "best budget oversized pick",
+        "blurb": "An affordable option that still manages padded, shoulder-friendly straps and enough room for a stack of textbooks and binders. It won't win style points, but it's a dependable choice for anyone who needs the space more than the branding.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": false
+      }
+    ],
+    "buyingTips": "A padded laptop sleeve is worth prioritizing if a device is coming along every day. Beyond that, wide, padded shoulder straps matter more over a full school year than extra pockets do — a bag carried daily should be judged on comfort first. Most day-to-day school needs fit in 20 to 32 liters; anything bigger starts to feel like a travel pack.",
+    "pullQuote": "A good backpack outlasts the school year. A bad one gives up by October."
+  },
+  {
+    "_id": "seed-tax-free-weekend-2026",
+    "title": "Tax-Free Weekend 2026: What to Buy and When",
+    "slug": "tax-free-weekend-2026-what-to-buy-and-when",
+    "category": "home",
+    "ranked": false,
+    "publishedAt": "2026-07-26T09:00:00.000Z",
+    "updatedAt": "2026-07-26T09:00:00.000Z",
+    "readingMinutes": 4,
+    "intro": [
+      {
+        "_type": "block",
+        "_key": "intro1",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "_key": "intro1a",
+            "text": "Most sales-tax holidays land in the summer, though the exact timing and what's exempt varies a lot by state — some run one weekend, others stretch into a full month. The categories below cover what's most commonly exempt, whatever's actually on your list."
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "_key": "intro2",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "_key": "intro2a",
+            "text": "Every pick here is checked against published state tax guidance before it makes the list, so you know roughly what's exempt and when to shop it. No rush, just really good timing."
+          }
+        ]
+      }
+    ],
+    "heroImage": "/images/tax-free-weekend-hero.jpg",
+    "products": [
+      {
+        "rank": 1,
+        "name": "Clothing & shoes",
+        "subtitle": "the most universally exempt category",
+        "blurb": "Nearly every participating state exempts everyday clothing and footwear up to some per-item price cap, which makes this the safest category to stock up on regardless of which state's holiday you're shopping.",
+        "examples": "sneakers, jeans, lightweight jackets, everyday t-shirts",
+        "image": null
+      },
+      {
+        "rank": 2,
+        "name": "Laptops & tablets",
+        "subtitle": "the big-ticket exemption, where it applies",
+        "blurb": "Not every state's holiday covers electronics, and the ones that do usually cap the exempt price — so this is the category most worth double-checking against your specific state's rules before you assume a laptop qualifies.",
+        "examples": "everyday laptops, basic tablets, wireless earbuds, home printers",
+        "image": null
+      },
+      {
+        "rank": 3,
+        "name": "Office & school supplies",
+        "subtitle": "notebooks, pens, and bags, usually bundled together",
+        "blurb": "Pens, notebooks, binders, and backpacks are typically grouped under one exemption with their own price cap, separate from the clothing cap — worth restocking whether or not anyone in the house is actually heading back to school.",
+        "examples": "backpacks, notebooks, binders, pens and highlighters",
+        "image": null
+      },
+      {
+        "rank": 4,
+        "name": "Sporting goods & outdoor gear",
+        "subtitle": "exempt in some states, taxed as usual in others",
+        "blurb": "A few states extend the exemption to general sporting goods and outdoor equipment, while most don't — this is the category where it pays most to check your specific state's list rather than assume.",
+        "examples": "sneakers and cleats, helmets, camping gear, swimwear",
+        "image": null
+      },
+      {
+        "rank": 5,
+        "name": "Energy- & water-efficient appliances",
+        "subtitle": "a separate holiday in some states, worth timing around",
+        "blurb": "A handful of states run a distinct energy- or water-efficiency tax holiday, sometimes the same weekend as the general one and sometimes on its own — worth checking if a larger appliance purchase is already on the calendar.",
+        "examples": "Energy Star refrigerators, washing machines, water heaters, ceiling fans",
+        "image": null
+      }
+    ],
+    "stateDates": [
+      {"state": "Florida", "dates": "Jul 20 – Aug 20", "note": "longest window of any state"},
+      {"state": "New Mexico", "dates": "Jul 31 – Aug 2"},
+      {"state": "Tennessee", "dates": "Jul 31 – Aug 2"},
+      {"state": "West Virginia", "dates": "Jul 31 – Aug 3"},
+      {"state": "Arkansas", "dates": "Aug 1 – 2"},
+      {"state": "Iowa", "dates": "Aug 7 – 8"},
+      {"state": "Missouri", "dates": "Aug 7 – 9"},
+      {"state": "Ohio", "dates": "Aug 7 – 9"},
+      {"state": "Oklahoma", "dates": "Aug 7 – 9"},
+      {"state": "South Carolina", "dates": "Aug 7 – 9"},
+      {"state": "Texas", "dates": "Aug 7 – 9"},
+      {"state": "Virginia", "dates": "Aug 7 – 9"},
+      {"state": "Massachusetts", "dates": "Aug 8 – 9"},
+      {"state": "Maryland", "dates": "Aug 9 – 15"},
+      {"state": "Connecticut", "dates": "Aug 16 – 22"}
+    ],
+    "buyingTips": "Exemptions and price caps vary by state, so it's worth checking your own state's specific list before assuming a category qualifies. Buying online usually still counts as long as the order is placed and paid for during the window, even if delivery comes later — but check your retailer's tax settings to be sure it's applying the exemption correctly.",
+    "pullQuote": "A tax holiday won't make a bad purchase good. It'll just make it a little cheaper."
+  },
+  {
+    "_id": "seed-home-tech-gadgets-2026",
+    "title": "Top 5 Home Tech Gadgets Worth Having in 2026",
+    "slug": "top-5-home-tech-gadgets-worth-having-in-2026",
+    "category": "tech",
+    "publishedAt": "2026-07-27T09:00:00.000Z",
+    "updatedAt": "2026-07-27T09:00:00.000Z",
+    "readingMinutes": 5,
+    "intro": [
+      {
+        "_type": "block",
+        "_key": "intro1",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "_key": "intro1a",
+            "text": "Most \"smart home\" advice still assumes you want to automate an entire house at once. The gadgets that actually earn their keep tend to be smaller than that — one device that fixes one specific annoyance, set up in an afternoon and then forgotten about."
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "_key": "intro2",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "_key": "intro2a",
+            "text": "Every pick here is checked against reviews and testing data from sources like Engadget, Forbes Vetted, and TechRadar before it makes the list. No rush, just really good picks."
+          }
+        ]
+      }
+    ],
+    "heroImage": "/images/home-tech-gadgets-hero.jpg",
+    "products": [
+      {
+        "rank": 1,
+        "name": "Amazon Echo Show 5 (3rd Gen)",
+        "subtitle": "best all-around smart home hub",
+        "blurb": "This one doubles as a home command center: check a video doorbell's feed, run through the day's calendar, and control lights or a thermostat by voice, all from a screen small enough not to dominate a kitchen counter. It plays well with most other ecosystems, which makes it an easy default for a first smart display.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": true
+      },
+      {
+        "rank": 2,
+        "name": "Eufy Security Video Doorbell E340",
+        "subtitle": "best for actually seeing packages",
+        "blurb": "A second camera angled down at the doorstep means it actually catches what's happening at ground level, not just faces at eye height — useful for anyone tired of missing porch deliveries in the frame entirely. Local storage options also mean it can run without a mandatory subscription.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 3,
+        "name": "TP-Link Kasa Smart Plug",
+        "subtitle": "best low-effort starting point",
+        "blurb": "No smart bulbs or rewiring required — this one turns a regular lamp or fan into something schedulable and voice-controlled in about five minutes. Built-in energy monitoring is a nice bonus for anyone curious what's actually driving up the electric bill.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 4,
+        "name": "Anker Nebula Capsule 3 Laser",
+        "subtitle": "most fun for the size",
+        "blurb": "A soda-can-sized laser projector that throws a genuinely sharp 100-inch image and runs its own smart TV software, no streaming stick required. Battery life covers a full movie with no cord in sight, which is most of the appeal.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 5,
+        "name": "Govee M1 RGBIC LED Strip Light",
+        "subtitle": "best ambiance upgrade",
+        "blurb": "Individually addressable color segments mean it can shift through multiple colors at once instead of washing a room in one flat hue, and it can sync to music or whatever's on screen. Setup is stick-and-plug simple, with no separate hub required.",
+        "image": null,
+        "affiliateUrl": "#",
+        "isEditorsPick": false
+      }
+    ],
+    "buyingTips": "Check for Matter support before buying anything new — it's become the standard that lets devices from different brands work together without separate apps for each one. Beyond that, start with one or two gadgets that solve an actual annoyance rather than trying to automate the whole house at once; it's a much easier way to tell what's actually worth keeping.",
+    "pullQuote": "A smart home doesn't have to be a whole system. Sometimes it's just one lamp that finally turns itself off."
+  }
+]

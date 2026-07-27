@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Shopping Sloth</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <img src="sloth-mark.svg" alt="" class="brand-mark">
+      shopping sloth
+    </a>
+    <nav class="nav">
+      <a href="index.html">home</a>
+      <a href="index.html#categories">categories</a>
+      <a href="about.html" class="is-current">about</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="wrap prose" style="max-width:760px;">
+
+  <div class="page-head">
+    <div class="eyebrow">
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><circle cx="7" cy="6" r="2"/><circle cx="12" cy="4.5" r="2"/><circle cx="17" cy="6" r="2"/><ellipse cx="12" cy="13.5" rx="6" ry="5"/></svg>
+      about us
+    </div>
+    <h1>Slow picks. Fast results.</h1>
+  </div>
+
+  <p>Here's the thing about sloths: they move at about 0.15 miles per hour. They sleep up to 15 hours a day. They will not be rushed.</p>
+  <p>But sloths are also incredibly deliberate. Every move they make is efficient, necessary, and considered. If a sloth is going somewhere, it's going somewhere good. That's basically our whole editorial philosophy.</p>
+
+  <h2>Why a sloth?</h2>
+  <p>We got tired of "top 10" lists clearly written in twenty minutes by someone who never read past the first review. So we decided to be the opposite: slow, thorough, and mildly suspicious of anything claiming to be "revolutionary."</p>
+
+  <h2>What we actually do</h2>
+  <p>Every pick is checked against reviews and testing data from sources that actually put products through the wringer. We take our time before telling you what's worth buying.</p>
+
+  <h2>A note on affiliate links</h2>
+  <p>Some of our links are affiliate links, and we may earn a small commission if you buy through them, at no extra cost to you. Commissions never influence our picks.</p>
+
+  <div class="quote" style="margin:56px 0;">
+    <p>"We move slow, but only toward the good stuff."</p>
+    <span>— the shopping sloth team</span>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="sloth-mark.svg" alt="" class="brand-mark">
+          shopping sloth
+        </div>
+        <div class="footer-tagline">Slow picks. Fast results.</div>
+      </div>
+      <nav class="footer-nav">
+        <a href="index.html">home</a>
+        <a href="index.html#categories">categories</a>
+        <a href="about.html">about</a>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <span>contains affiliate links · we may earn a commission</span>
+      <span>© 2026 shopping sloth</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll(".nav-toggle").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const nav = document.querySelector(".nav");
+      const open = nav.classList.toggle("open");
+      btn.setAttribute("aria-expanded", String(open));
+    });
+  });
+</script>
+</body>
+</html>

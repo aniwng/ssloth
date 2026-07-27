@@ -1,0 +1,21 @@
+---
+import PawIcon from './PawIcon.astro'
+import {imageUrl} from '../lib/sanityClient.js'
+
+// Renders a Sanity image (or a plain URL string, e.g. the dev seed
+// content's stock photos), or the brand paw mark on the category-tinted
+// placeholder surface when there isn't one. The container supplies the `ph`
+// class and its tint (see .cat-* in style.css) — callers should drop `ph`
+// from the container once a real image exists, so the wash doesn't show
+// through behind the photo (see [slug].astro and RoundupCard.astro).
+//
+// Full image sourcing is still an open decision (CLAUDE.md task 5). Article
+// hero / card images use licensed stock photography as an interim step;
+// per-product thumbnails are hidden entirely for now (see .entry-thumb in
+// style.css) rather than using stock photos, since those would need to
+// depict the exact named product, not just the category.
+const {source, width = 800, height, alt = ''} = Astro.props
+const url = imageUrl(source, {width, height})
+---
+
+{url ? <img src={url} alt={source?.alt ?? alt} loading="lazy" /> : <PawIcon size={40} />}

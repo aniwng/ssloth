@@ -1,0 +1,20 @@
+week,publish_date,topic,category,slug,review_mode,status,notes
+1,2026-07-14,Top 5 Sunscreens for Your Body,beauty,top-5-sunscreens-for-your-body-in-2026,human-reviewed,Published,First article. Hand-written; seeded in astro/src/lib/seed.
+1,2026-07-26,Top 5 Backpacks for Back to School,accessories,top-5-backpacks-for-back-to-school-in-2026,human-reviewed,Published,Second hand-written article; seeded in astro/src/lib/seed. Added out of band from the original 8-week queue below.
+1,2026-07-26,Tax-Free Weekend 2026: What to Buy and When,home,tax-free-weekend-2026-what-to-buy-and-when,human-reviewed,Published,Third hand-written article; unranked guide format (ranked: false + stateDates). Seeded in astro/src/lib/seed. Added out of band from the original 8-week queue below.
+1,2026-07-27,Top 5 Home Tech Gadgets Worth Having in 2026,tech,top-5-home-tech-gadgets-worth-having-in-2026,human-reviewed,Published,Fourth hand-written article. Seeded in astro/src/lib/seed. Added out of band from the original 8-week queue below.
+1,2026-07-17,Best Wireless Earbuds Under $100,tech,best-wireless-earbuds-under-100,human-reviewed,Idea,
+2,2026-07-21,Top 5 Portable Fans for Summer,outdoor,top-5-portable-fans-for-summer,human-reviewed,Idea,
+2,2026-07-24,Best Robot Vacuums for Small Apartments,home,best-robot-vacuums-for-small-apartments,auto,Idea,
+3,2026-07-28,Top 5 Retinol Serums for Beginners,beauty,top-5-retinol-serums-for-beginners,human-reviewed,Idea,Skincare claims — always human review.
+3,2026-07-31,Best Budget Mechanical Keyboards,tech,best-budget-mechanical-keyboards,auto,Idea,
+4,2026-08-04,Top 5 Hiking Daypacks Under $150,outdoor,top-5-hiking-daypacks-under-150,auto,Idea,
+4,2026-08-07,Best Air Purifiers for Allergy Season,home,best-air-purifiers-for-allergy-season,human-reviewed,Idea,Health claims — always human review.
+5,2026-08-11,Top 5 Lip Balms That Actually Last,beauty,top-5-lip-balms-that-actually-last,auto,Idea,
+5,2026-08-14,Best Portable Monitors for Working Away,tech,best-portable-monitors-for-working-away,auto,Idea,
+6,2026-08-18,Top 5 Camping Chairs Worth Carrying,outdoor,top-5-camping-chairs-worth-carrying,auto,Idea,
+6,2026-08-21,Best Drip Coffee Makers Under $200,home,best-drip-coffee-makers-under-200,auto,Idea,
+7,2026-08-25,Top 5 Body Washes for Dry Skin,beauty,top-5-body-washes-for-dry-skin,human-reviewed,Idea,
+7,2026-08-28,Best E-Readers in 2026,tech,best-e-readers-in-2026,auto,Idea,
+8,2026-09-01,Top 5 Insulated Water Bottles,outdoor,top-5-insulated-water-bottles,auto,Idea,
+8,2026-09-04,Best Standing Desks for Small Rooms,home,best-standing-desks-for-small-rooms,auto,Idea,

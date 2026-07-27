@@ -1,0 +1,14 @@
+---
+// Placeholder brand mark. Deliberate: three sloth-illustration attempts didn't
+// read as "sloth", so the brand leans on color, type, voice, and slow motion
+// instead. Don't re-attempt a mascot without new direction — see CLAUDE.md.
+const {size = 24, big = false} = Astro.props
+const r = big ? 2.2 : 2
+---
+
+<svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" aria-hidden="true">
+  <circle cx="7" cy="6" r={r} />
+  <circle cx={big ? 12.5 : 12} cy="4.5" r={r} />
+  <circle cx={big ? 18 : 17} cy="6" r={r} />
+  <ellipse cx={big ? 12.5 : 12} cy={big ? 14 : 13.5} rx={big ? 7 : 6} ry={big ? 6 : 5} />
+</svg>

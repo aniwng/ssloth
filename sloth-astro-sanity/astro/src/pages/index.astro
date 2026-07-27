@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PawIcon from '../components/PawIcon.astro'
+import RoundupCard from '../components/RoundupCard.astro'
+import {getRoundups, CATEGORIES} from '../lib/roundups.js'
+
+const roundups = await getRoundups()
+const latest = roundups.slice(0, 6)
+---
+
+<BaseLayout title="Shopping Sloth — Slow Picks. Fast Results.">
+  <section class="hero">
+    <div class="paw-trail" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="eyebrow">
+        <PawIcon size={12} />
+        no rush, just really good picks
+      </div>
+      <h1>Slow picks.<br />Fast results.</h1>
+      <p>Every pick here is checked against real reviews and testing data, so you don't have to hurry into a bad purchase.</p>
+      <div class="search">
+        <label>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+          </svg>
+          <input type="text" placeholder="search for a product roundup" aria-label="Search roundups" data-search />
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <PawIcon size={13} />
+        <h2>latest roundups</h2>
+      </div>
+      {
+        latest.length ? (
+          <div class="grid" data-results>
+            {latest.map((roundup) => (
+              <RoundupCard roundup={roundup} />
+            ))}
+          </div>
+        ) : (
+          <div class="empty">
+            No roundups published yet. Run <code>npm run generate</code> in <code>scripts/</code>, or add
+            one in the Studio.
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section" id="categories">
+    <div class="wrap">
+      <div class="section-head"><h2>browse by category</h2></div>
+      <div class="cat-row">
+        {
+          CATEGORIES.map((category) => (
+            <a class={`cat-pill cat-${category}`} href={`/category/${category}/`}>
+              {category}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="quote">
+        <p>"We move slow, but only toward the good stuff."</p>
+        <span>— the shopping sloth team</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Client-side filter over the rendered cards. Deliberately dumb — no index,
+    // no search service — until there are enough roundups to need one.
+    const input = document.querySelector('[data-search]')
+    const grid = document.querySelector('[data-results]')
+    input?.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase()
+      grid?.querySelectorAll('.card').forEach((card) => {
+        card.hidden = q ? !card.textContent.toLowerCase().includes(q) : false
+      })
+    })
+  </script>
+</BaseLayout>

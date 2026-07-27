@@ -1,0 +1,16 @@
+{
+  "name": "shopping-sloth-automation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "node generate-and-publish.js",
+    "generate:dry": "node generate-and-publish.js --dry-run",
+    "queue": "node generate-and-publish.js --list"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.68.0",
+    "@sanity/client": "^6.24.1",
+    "dotenv": "^16.4.7"
+  }
+}

@@ -1,0 +1,989 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ===========================================================================
+   Shopping Sloth — modern editorial theme
+
+   Direction: off-white paper, near-black ink, one warm clay accent used
+   sparingly. High-contrast display serif over a neutral grotesque, generous
+   whitespace, hairline rules instead of boxes.
+
+   The accent earns its keep by scarcity — it appears on primary CTAs, the
+   editor's pick, and small labels, and nowhere as a large field. That
+   restraint is what separates this from the cream-and-terracotta look the
+   brand deliberately avoided.
+
+   Kept from the original brand: the name, the dry sloth voice, the paw mark,
+   and the slow motion timing. Do not speed the transitions up — the
+   deliberate easing is the "slow" joke, expressed in motion.
+   =========================================================================== */
+
+:root {
+  /* ---------- Surfaces and ink ---------- */
+  --paper: #FBFAF8;
+  --paper-raised: #FFFFFF;
+  --paper-sunk: #F4F1ED;
+  --ink: #171513;
+  --ink-soft: #57514C;
+  --muted: #8A8580;
+
+  /* ---------- Accent (used sparingly) ---------- */
+  --accent: #B8705F;
+  --accent-deep: #96574A;
+  --accent-tint: rgba(184, 112, 95, 0.10);
+
+  /* ---------- Hairlines ---------- */
+  --line: rgba(23, 21, 19, 0.10);
+  --line-strong: rgba(23, 21, 19, 0.22);
+
+  /* ---------- Motion (brand — do not speed up) ---------- */
+  --ease-slow: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-slow: 0.6s;
+
+  /* ---------- Type ---------- */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --step--2: 10px;
+  --step--1: 12px;
+  --step-0: 15px;
+  --step-1: clamp(16px, 0.3vw + 15px, 17px);
+  --step-2: clamp(18px, 0.5vw + 16px, 21px);
+  --step-3: clamp(22px, 1vw + 19px, 27px);
+  --step-4: clamp(29px, 2.4vw + 20px, 44px);
+  --step-5: clamp(38px, 5.2vw + 16px, 68px);
+
+  /* Uppercase micro-label — the workhorse of the editorial look. */
+  --label-size: 11px;
+  --label-track: 0.14em;
+
+  /* ---------- Spacing ---------- */
+  --space-1: 6px;
+  --space-2: 10px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+  --space-7: 104px;
+
+  /* ---------- Shape ---------- */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+  --shadow-md: 0 14px 30px rgba(23, 21, 19, 0.08);
+
+  --measure: 68ch;
+
+  /* Default placeholder tint; overridden per category below. */
+  --ph-a: #EFEBE5;
+  --ph-b: #E2DCD3;
+  --ph-glow: #F8F6F2;
+  --ph-ink: var(--muted);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  /* The header is sticky, so anchored jumps (#categories) must clear it. */
+  scroll-padding-top: 84px;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+/* Shared micro-label. */
+.eyebrow, .tag, .card-meta, .nav, .pick-flag, .footer-nav, .footer-legal, .btn {
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ---------- Category accents ----------
+   Muted enough to read as different paper stocks rather than colour-coding. */
+
+.cat-beauty  { --ph-a: #F3E6E2; --ph-b: #E7D3CD; --ph-glow: #FAF3F1; --ph-ink: #8F5548; }
+.cat-tech    { --ph-a: #E5E8EB; --ph-b: #D3D9DE; --ph-glow: #F3F5F7; --ph-ink: #4A5560; }
+.cat-home    { --ph-a: #F0EAE2; --ph-b: #E2D9CD; --ph-glow: #F9F5F0; --ph-ink: #6B5B45; }
+.cat-accessories { --ph-a: #E6EAE3; --ph-b: #D4DACF; --ph-glow: #F4F6F2; --ph-ink: #4F5C46; }
+
+/* ---------- Image placeholders ----------
+   Image sourcing is still an open decision, so these are on every page.
+   Built to read as intentional paper texture, not as a broken image. */
+
+.ph {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ph-ink);
+  background:
+    radial-gradient(58% 68% at 24% 24%, var(--ph-glow), transparent 72%),
+    linear-gradient(150deg, var(--ph-a), var(--ph-b));
+}
+
+.ph::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(currentColor 0.9px, transparent 1.3px);
+  background-size: 18px 18px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.ph svg {
+  position: relative;
+  opacity: 0.3;
+  transition: transform var(--dur-slow) var(--ease-slow);
+}
+
+.ph img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(251, 250, 248, 0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header .wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.brand svg { width: 21px; height: 21px; color: var(--accent); }
+
+/* Full-color brand mark (sloth-mark.svg). Height-constrained — the asset's
+   own aspect ratio (~719:822) sets the width. Sized a bit larger than the
+   old single-color glyph since a detailed illustration needs more room to
+   read clearly than a simple line icon did. */
+.brand-mark { display: block; width: auto; height: 34px; }
+
+.nav {
+  display: flex;
+  gap: var(--space-5);
+  color: var(--ink-soft);
+}
+
+.nav a {
+  position: relative;
+  padding-bottom: 4px;
+  transition: color var(--dur-slow) var(--ease-slow);
+}
+
+.nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-slow) var(--ease-slow);
+}
+
+.nav a:hover, .nav a:focus-visible, .nav a.is-current { color: var(--ink); }
+.nav a:hover::after, .nav a.is-current::after { transform: scaleX(1); }
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 4px;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-7) 0 var(--space-6);
+  text-align: center;
+}
+
+/* Barely-there warmth. Minimal means the whitespace carries the page. */
+.paw-trail {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(46% 60% at 82% 6%, rgba(184, 112, 95, 0.09), transparent 70%),
+    radial-gradient(40% 54% at 10% 4%, rgba(23, 21, 19, 0.045), transparent 72%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 10%, transparent 72%);
+  mask-image: linear-gradient(to bottom, #000 10%, transparent 72%);
+}
+
+.hero > .wrap { position: relative; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--accent);
+  margin-bottom: var(--space-4);
+}
+
+.eyebrow svg { color: var(--accent); }
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-5);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  margin: 0 0 var(--space-4);
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.hero p {
+  max-width: 44ch;
+  margin: 0 auto var(--space-5);
+  color: var(--ink-soft);
+  font-size: var(--step-1);
+}
+
+.search { display: flex; justify-content: center; }
+
+.search label {
+  position: relative;
+  display: block;
+  width: min(400px, 100%);
+}
+
+.search svg {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+/* An underline, not a pill — the input should feel like stationery. */
+.search input {
+  width: 100%;
+  padding: 10px 0 10px 26px;
+  border: none;
+  border-bottom: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--step-0);
+  color: var(--ink);
+  outline: none;
+  transition: border-color var(--dur-slow) var(--ease-slow);
+}
+
+.search input::placeholder { color: var(--muted); }
+.search input:focus { border-bottom-color: var(--accent); }
+
+/* ---------- Sections ---------- */
+
+.section { padding: 0 0 var(--space-6); }
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.section-head svg { width: 13px; height: 13px; color: var(--accent); }
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-3);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* ---------- Card grid ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5) var(--space-4);
+}
+
+/* No card chrome. The image block and the type do the work; the hairline
+   only appears under the body so the grid reads as columns, not boxes. */
+.card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: none;
+  transition: transform var(--dur-slow) var(--ease-slow);
+}
+
+.card[hidden] { display: none; }
+
+.card:hover, .card:focus-within { transform: translateY(-3px); }
+.card:hover .ph svg { transform: scale(1.07); }
+
+.card-img {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.card-img svg { width: 30px; height: 30px; }
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-body {
+  padding: var(--space-3) 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.tag {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+}
+
+.tag::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ph-ink, currentColor);
+}
+
+.tag.beauty::before  { background: #8F5548; }
+.tag.tech::before    { background: #4A5560; }
+.tag.home::before    { background: #6B5B45; }
+.tag.accessories::before { background: #4F5C46; }
+
+.card-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-2);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.card-meta {
+  color: var(--muted);
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+/* ---------- Category list ---------- */
+
+.cat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.cat-pill {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-3);
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-2);
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  transition: background var(--dur-slow) var(--ease-slow), padding-left var(--dur-slow) var(--ease-slow);
+}
+
+.cat-row .cat-pill:last-child { border-right: none; }
+
+.cat-pill::before {
+  content: '';
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(150deg, var(--ph-a), var(--ph-b));
+}
+
+.cat-pill:hover, .cat-pill:focus-visible {
+  background: var(--paper-sunk);
+  padding-left: var(--space-4);
+}
+
+/* ---------- Pull quote ---------- */
+
+.quote {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  background: none;
+  color: var(--ink);
+}
+
+.quote p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--step-3);
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  max-width: 26ch;
+  margin: 0 auto var(--space-3);
+  text-wrap: balance;
+}
+
+.quote span {
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  font-family: inherit;
+  padding: 12px 22px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  white-space: nowrap;
+  background: var(--accent);
+  color: var(--paper-raised);
+  transition:
+    background var(--dur-slow) var(--ease-slow),
+    border-color var(--dur-slow) var(--ease-slow),
+    color var(--dur-slow) var(--ease-slow);
+}
+
+.btn:hover, .btn:focus-visible {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+}
+
+/* Ranks 2-5 — present but quieter, so the pick keeps the only solid CTA. */
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+.btn-secondary:hover, .btn-secondary:focus-visible {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper-raised);
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  background: var(--ink);
+  color: rgba(251, 250, 248, 0.6);
+  margin-top: var(--space-7);
+  padding: var(--space-6) 0 var(--space-5);
+  font-size: var(--step--1);
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid rgba(251, 250, 248, 0.14);
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+}
+
+.footer-brand svg { width: 20px; height: 20px; color: var(--accent); }
+.footer-brand .brand-mark { height: 28px; }
+.footer-tagline { margin: var(--space-1) 0 0 30px; }
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  color: rgba(251, 250, 248, 0.72);
+}
+
+.footer-nav a { transition: color var(--dur-slow) var(--ease-slow); }
+.footer-nav a:hover, .footer-nav a:focus-visible { color: var(--paper); }
+
+.footer-legal {
+  padding-top: var(--space-5);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  justify-content: space-between;
+  font-size: var(--step--2);
+  color: rgba(251, 250, 248, 0.5);
+}
+
+/* ---------- Article ---------- */
+
+.article-head { padding: var(--space-6) 0 var(--space-4); }
+
+.article-head h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-4);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  margin: var(--space-3) 0 var(--space-3);
+  color: var(--ink);
+  /* ch resolves against this element's own display size, so the measure
+     tracks the headline rather than the body text. */
+  max-width: 17ch;
+  text-wrap: balance;
+}
+
+.article-meta {
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* Deliberately shallow — a banner, not a full photo spread. Uses a licensed
+   stock photo per article (see CLAUDE.md task 5) until real product/brand
+   photography is sourced. */
+.article-hero {
+  height: clamp(150px, 18vw, 220px);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-5);
+  overflow: hidden;
+}
+
+.article-hero svg { width: 32px; height: 32px; }
+
+.article-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.intro p {
+  color: var(--ink-soft);
+  font-size: var(--step-1);
+  max-width: var(--measure);
+}
+
+/* Editorial lead paragraph. */
+.intro p:first-child {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--step-2);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+/* ---------- Rankings ----------
+   A numbered list separated by hairlines, not five stacked boxes. */
+
+.rankings {
+  display: flex;
+  flex-direction: column;
+  margin: var(--space-6) 0 var(--space-5);
+  border-top: 1px solid var(--line);
+}
+
+.entry {
+  display: grid;
+  /* TEMPORARY: 3 columns instead of 4 — the per-product photo column
+     (.entry-thumb) is hidden until real product photos are sourced (stock
+     photography isn't honest here, since it'd have to depict this exact
+     named product — see CLAUDE.md task 5). When real photos land, restore
+     `auto 84px minmax(0, 1fr) auto` here, the mobile override below, and
+     .entry-copy's grid-column start — and remove entry-thumb's display:none. */
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: var(--space-4);
+  row-gap: var(--space-3);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+
+.entry.pick {
+  background: var(--accent-tint);
+  border-bottom-color: var(--line);
+  padding: var(--space-5) var(--space-4);
+  margin: 0 calc(var(--space-4) * -1);
+  border-radius: var(--radius-md);
+}
+
+.pick-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--accent);
+  margin-bottom: var(--space-1);
+}
+
+.pick-flag svg { width: 11px; height: 11px; }
+
+/* The whole product is a ranked list — the rank should read first. */
+.rank-num {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 3.4vw, 46px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--muted);
+  opacity: 0.5;
+  width: 1.5ch;
+  text-align: center;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.entry.pick .rank-num { color: var(--accent); opacity: 1; font-weight: 500; }
+
+.entry-thumb {
+  width: 84px;
+  height: 84px;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+  /* TEMPORARY: hidden until real product photos exist — see the comment
+     on .entry above. */
+  display: none;
+}
+
+.entry-thumb svg { width: 22px; height: 22px; }
+
+.entry-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-2);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.entry-sub {
+  font-size: var(--step--1);
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.entry-copy {
+  grid-column: 2 / -1; /* TEMPORARY: was 3 / -1 — see .entry's comment */
+  font-size: var(--step-0);
+  color: var(--ink-soft);
+  max-width: var(--measure);
+  margin: 0;
+}
+
+/* ---------- Unranked list (roundup.ranked === false) ----------
+   Same slot as .rankings, for articles about product *categories* rather
+   than one named winner — no rank badge, no editor's pick, no buy button.
+   Deliberately plainer than .entry: a name, a superlative, a blurb. */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin: var(--space-6) 0 var(--space-5);
+  border-top: 1px solid var(--line);
+}
+
+.list-item {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.list-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-2);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.list-item .entry-copy {
+  grid-column: unset; /* not inside a grid here — reset .entry-copy's grid placement */
+  max-width: var(--measure);
+  margin-top: var(--space-2);
+}
+
+.list-examples {
+  max-width: var(--measure);
+  margin-top: var(--space-2);
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+.list-examples strong {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+/* ---------- State-by-state dates (roundup.stateDates) ---------- */
+
+.state-dates {
+  margin: var(--space-5) 0;
+}
+
+.state-dates h2 {
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 0 var(--space-3);
+}
+
+.state-date-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.state-date-state {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-1);
+  color: var(--ink);
+  min-width: 11ch;
+}
+
+.state-date-dates {
+  font-size: var(--step-0);
+  color: var(--ink-soft);
+}
+
+.state-date-note {
+  font-size: var(--step--1);
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ---------- Tips ---------- */
+
+.tips {
+  border-top: 1px solid var(--ink);
+  padding: var(--space-4) 0 0;
+  margin-bottom: var(--space-5);
+}
+
+.tips h2 {
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 0 var(--space-3);
+}
+
+.tips p { font-size: var(--step-1); color: var(--ink-soft); margin: 0; max-width: var(--measure); }
+
+/* ---------- Long-form / utility ---------- */
+
+.prose p { color: var(--ink-soft); font-size: var(--step-1); max-width: var(--measure); }
+
+.prose h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-3);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+.prose a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent); }
+
+.page-head { padding: var(--space-6) 0 var(--space-3); }
+
+.page-head h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-4);
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  margin: var(--space-3) 0 var(--space-2);
+}
+
+.disclosure {
+  font-size: var(--step--1);
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-3);
+  margin: var(--space-5) 0;
+  max-width: var(--measure);
+}
+
+.empty {
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  color: var(--muted);
+}
+
+.draft-flag {
+  display: inline-block;
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--paper-sunk);
+  color: var(--muted);
+  margin-left: var(--space-1);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 980px) {
+  .wrap { padding: 0 var(--space-4); }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .cat-row { grid-template-columns: repeat(2, 1fr); }
+  .cat-row .cat-pill:nth-child(2n) { border-right: none; }
+}
+
+@media (max-width: 720px) {
+  .nav { display: none; }
+  .nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: calc(100% + 12px);
+    right: var(--space-4);
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    gap: var(--space-3);
+    box-shadow: var(--shadow-md);
+    z-index: 30;
+  }
+  .nav-toggle { display: block; }
+
+  .hero { padding: var(--space-6) 0 var(--space-5); }
+
+  .grid { grid-template-columns: 1fr; }
+
+  .article-head h1 { max-width: none; }
+
+  /* Rank + name on one row, everything else stacked beneath. TEMPORARY:
+     would be `auto 60px minmax(0, 1fr)` with the thumb column restored —
+     see .entry's comment above. */
+  .entry {
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: var(--space-3);
+    padding: var(--space-4) 0;
+  }
+  .entry.pick { padding: var(--space-4) var(--space-3); margin: 0 calc(var(--space-3) * -1); }
+  .entry-thumb { width: 60px; height: 60px; }
+  .rank-num { font-size: 28px; }
+  .entry-copy { grid-column: 1 / -1; }
+  .entry .btn { grid-column: 1 / -1; width: 100%; }
+
+  .footer-top { flex-direction: column; }
+}
+
+@media (max-width: 440px) {
+  .cat-row { grid-template-columns: 1fr; }
+  .cat-row .cat-pill { border-right: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}

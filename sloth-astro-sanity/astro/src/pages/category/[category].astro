@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PawIcon from '../../components/PawIcon.astro'
+import RoundupCard from '../../components/RoundupCard.astro'
+import {getRoundups, CATEGORIES} from '../../lib/roundups.js'
+
+export async function getStaticPaths() {
+  const roundups = await getRoundups()
+  return CATEGORIES.map((category) => ({
+    params: {category},
+    props: {category, roundups: roundups.filter((r) => r.category === category)},
+  }))
+}
+
+const {category, roundups} = Astro.props
+---
+
+<BaseLayout title={`${category} roundups — Shopping Sloth`}>
+  <div class="wrap">
+    <div class="page-head">
+      <div class="eyebrow">
+        <PawIcon size={12} />
+        category
+      </div>
+      <h1>{category}</h1>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      {
+        roundups.length ? (
+          <div class="grid">
+            {roundups.map((roundup) => (
+              <RoundupCard roundup={roundup} />
+            ))}
+          </div>
+        ) : (
+          <div class="empty">Nothing here yet. We're taking our time.</div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
