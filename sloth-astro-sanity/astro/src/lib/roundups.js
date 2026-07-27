@@ -4,6 +4,11 @@ import seedRoundups from './seed/roundups.json'
 
 export const CATEGORIES = ['beauty', 'tech', 'home', 'accessories']
 
+// Amazon Associates ID. Not sensitive — it's designed to appear in public
+// URLs — so it's safe as a plain default here rather than requiring a CI
+// secret, same pattern as astro.config.mjs's SITE_URL fallback.
+const AMAZON_ASSOCIATE_TAG = import.meta.env.PUBLIC_AMAZON_ASSOCIATE_TAG || 'shoppingslo03-20'
+
 const ROUNDUP_PROJECTION = `{
   _id,
   title,
@@ -54,6 +59,23 @@ export async function getRoundupsByCategory(category) {
 
 function sortRoundups(roundups) {
   return [...roundups].sort((a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? ''))
+}
+
+/**
+ * Appends the Amazon Associates tag to a real Amazon product URL. Leaves
+ * non-Amazon URLs and the "#" placeholder untouched — tagging only applies
+ * once a product actually links to Amazon.
+ */
+export function withAffiliateTag(url) {
+  if (!url || url === '#') return url
+  try {
+    const parsed = new URL(url)
+    if (!/(^|\.)amazon\.[a-z.]+$/i.test(parsed.hostname)) return url
+    parsed.searchParams.set('tag', AMAZON_ASSOCIATE_TAG)
+    return parsed.toString()
+  } catch {
+    return url
+  }
 }
 
 /** Portable Text -> HTML. Intros are plain paragraphs plus the occasional link. */

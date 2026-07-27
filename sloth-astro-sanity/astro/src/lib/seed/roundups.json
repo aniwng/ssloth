@@ -41,7 +41,7 @@
         "subtitle": "best overall body sunscreen",
         "blurb": "This one has become a favorite among testers for feeling almost weightless on skin. It goes on with a matte finish and blends in cleanly across a range of skin tones without leaving the chalky white cast that plagues so many sunscreens.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B086341GLG",
         "isEditorsPick": true
       },
       {
@@ -50,7 +50,7 @@
         "subtitle": "best reef-safe mineral sunscreen",
         "blurb": "If you spend time in the ocean or just want a simple ingredient list, this mineral formula relies on mineral UV filters rather than chemical ones, making it gentler for sensitive skin and reef-conscious for swimmers.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B0B4342J6V",
         "isEditorsPick": false
       },
       {
@@ -59,7 +59,7 @@
         "subtitle": "best all-around performer",
         "blurb": "Few sunscreens check every box dermatologists look for, but this one comes close: broad-spectrum coverage, water resistance, and reef-safe ingredients, all in one bottle for both face and body.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B0CKCWCQB4",
         "isEditorsPick": false
       },
       {
@@ -68,7 +68,7 @@
         "subtitle": "best for dry or sensitive skin",
         "blurb": "This one leans into a lotion-like feel rather than a typical sunscreen texture, doubling as a light moisturizer with plant-derived antioxidants like raspberry seed and prickly pear extract.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B07Q455SWC",
         "isEditorsPick": false
       },
       {
@@ -77,7 +77,7 @@
         "subtitle": "best for sensitive skin",
         "blurb": "Built around zinc oxide, this fragrance-free formula skips common irritants like oxybenzone and parabens, a good option if you've reacted to chemical sunscreens before.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B07MH4TDPZ",
         "isEditorsPick": false
       }
     ],
@@ -126,7 +126,7 @@
         "subtitle": "best dual-purpose backpack",
         "blurb": "This one holds up to both classroom routines and weekend hikes, with a stand-up shape, a padded laptop sleeve, and a removable waist strap for longer treks. Owners several years in report it's still holding together, which says more than any first-week impression can.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B0CN9S4ZG3",
         "isEditorsPick": true
       },
       {
@@ -135,7 +135,7 @@
         "subtitle": "best classic pick",
         "blurb": "A 32-liter main compartment and a dedicated organizer panel make this an easy fit for anyone who'd rather not think about where things go. It's been a reliable, unglamorous default for decades, and it still is.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B088KR4ZZS",
         "isEditorsPick": false
       },
       {
@@ -144,16 +144,16 @@
         "subtitle": "best for standing out",
         "blurb": "The boxy silhouette and padded 17-inch laptop sleeve make this one of the few backpacks that reads as a style choice rather than just a container. It costs more than the others here and comes in fewer colors, but the tradeoff is a bag people actually notice.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B0D76PY552",
         "isEditorsPick": false
       },
       {
         "rank": 4,
-        "name": "lululemon Everyday Backpack 21L",
+        "name": "lululemon Everywhere Backpack",
         "subtitle": "best for a grown-up look",
         "blurb": "Water-repellent fabric and a clean, unbranded-looking shape mean this one transitions from high school hallways to an internship without looking out of place either way. Multiple interior pockets keep it organized without the bulk of a bigger bag.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B01E3Z6P8I",
         "isEditorsPick": false
       },
       {
@@ -162,7 +162,7 @@
         "subtitle": "best budget oversized pick",
         "blurb": "An affordable option that still manages padded, shoulder-friendly straps and enough room for a stack of textbooks and binders. It won't win style points, but it's a dependable choice for anyone who needs the space more than the branding.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B07N3WQ6H7",
         "isEditorsPick": false
       }
     ],
@@ -248,21 +248,67 @@
       }
     ],
     "stateDates": [
-      {"state": "Florida", "dates": "Jul 20 – Aug 20", "note": "longest window of any state"},
-      {"state": "New Mexico", "dates": "Jul 31 – Aug 2"},
-      {"state": "Tennessee", "dates": "Jul 31 – Aug 2"},
-      {"state": "West Virginia", "dates": "Jul 31 – Aug 3"},
-      {"state": "Arkansas", "dates": "Aug 1 – 2"},
-      {"state": "Iowa", "dates": "Aug 7 – 8"},
-      {"state": "Missouri", "dates": "Aug 7 – 9"},
-      {"state": "Ohio", "dates": "Aug 7 – 9"},
-      {"state": "Oklahoma", "dates": "Aug 7 – 9"},
-      {"state": "South Carolina", "dates": "Aug 7 – 9"},
-      {"state": "Texas", "dates": "Aug 7 – 9"},
-      {"state": "Virginia", "dates": "Aug 7 – 9"},
-      {"state": "Massachusetts", "dates": "Aug 8 – 9"},
-      {"state": "Maryland", "dates": "Aug 9 – 15"},
-      {"state": "Connecticut", "dates": "Aug 16 – 22"}
+      {
+        "state": "Florida",
+        "dates": "Jul 20 – Aug 20",
+        "note": "longest window of any state"
+      },
+      {
+        "state": "New Mexico",
+        "dates": "Jul 31 – Aug 2"
+      },
+      {
+        "state": "Tennessee",
+        "dates": "Jul 31 – Aug 2"
+      },
+      {
+        "state": "West Virginia",
+        "dates": "Jul 31 – Aug 3"
+      },
+      {
+        "state": "Arkansas",
+        "dates": "Aug 1 – 2"
+      },
+      {
+        "state": "Iowa",
+        "dates": "Aug 7 – 8"
+      },
+      {
+        "state": "Missouri",
+        "dates": "Aug 7 – 9"
+      },
+      {
+        "state": "Ohio",
+        "dates": "Aug 7 – 9"
+      },
+      {
+        "state": "Oklahoma",
+        "dates": "Aug 7 – 9"
+      },
+      {
+        "state": "South Carolina",
+        "dates": "Aug 7 – 9"
+      },
+      {
+        "state": "Texas",
+        "dates": "Aug 7 – 9"
+      },
+      {
+        "state": "Virginia",
+        "dates": "Aug 7 – 9"
+      },
+      {
+        "state": "Massachusetts",
+        "dates": "Aug 8 – 9"
+      },
+      {
+        "state": "Maryland",
+        "dates": "Aug 9 – 15"
+      },
+      {
+        "state": "Connecticut",
+        "dates": "Aug 16 – 22"
+      }
     ],
     "buyingTips": "Exemptions and price caps vary by state, so it's worth checking your own state's specific list before assuming a category qualifies. Buying online usually still counts as long as the order is placed and paid for during the window, even if delivery comes later — but check your retailer's tax settings to be sure it's applying the exemption correctly.",
     "pullQuote": "A tax holiday won't make a bad purchase good. It'll just make it a little cheaper."
@@ -309,7 +355,7 @@
         "subtitle": "best all-around smart home hub",
         "blurb": "This one doubles as a home command center: check a video doorbell's feed, run through the day's calendar, and control lights or a thermostat by voice, all from a screen small enough not to dominate a kitchen counter. It plays well with most other ecosystems, which makes it an easy default for a first smart display.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B09BHCSWBD",
         "isEditorsPick": true
       },
       {
@@ -318,7 +364,7 @@
         "subtitle": "best for actually seeing packages",
         "blurb": "A second camera angled down at the doorstep means it actually catches what's happening at ground level, not just faces at eye height — useful for anyone tired of missing porch deliveries in the frame entirely. Local storage options also mean it can run without a mandatory subscription.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B0CD7NT4Y9",
         "isEditorsPick": false
       },
       {
@@ -327,7 +373,7 @@
         "subtitle": "best low-effort starting point",
         "blurb": "No smart bulbs or rewiring required — this one turns a regular lamp or fan into something schedulable and voice-controlled in about five minutes. Built-in energy monitoring is a nice bonus for anyone curious what's actually driving up the electric bill.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B0178IC5ZY",
         "isEditorsPick": false
       },
       {
@@ -336,7 +382,7 @@
         "subtitle": "most fun for the size",
         "blurb": "A soda-can-sized laser projector that throws a genuinely sharp 100-inch image and runs its own smart TV software, no streaming stick required. Battery life covers a full movie with no cord in sight, which is most of the appeal.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B0BCWNQPQ7",
         "isEditorsPick": false
       },
       {
@@ -345,7 +391,7 @@
         "subtitle": "best ambiance upgrade",
         "blurb": "Individually addressable color segments mean it can shift through multiple colors at once instead of washing a room in one flat hue, and it can sync to music or whatever's on screen. Setup is stick-and-plug simple, with no separate hub required.",
         "image": null,
-        "affiliateUrl": "#",
+        "affiliateUrl": "https://www.amazon.com/dp/B0B42BWVLM",
         "isEditorsPick": false
       }
     ],

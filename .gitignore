@@ -19,3 +19,4 @@ sloth-astro-sanity/scripts/out/*
 .DS_Store
 *.log
 npm-debug.log*
+content-schedule.csv
