@@ -137,6 +137,21 @@ export default defineType({
               description: 'Placeholder "#" until an affiliate program is connected. Unranked roundups skip this.',
             }),
             defineField({
+              name: 'relatedUrl',
+              title: 'Related article link (internal)',
+              type: 'string',
+              description:
+                'Optional, unranked roundups only. A site-relative path (e.g. "/top-5-backpacks-for-' +
+                'back-to-school-in-2026/") to a full roundup covering this category — rendered as a small ' +
+                'link under the blurb. Leave empty if there is no matching roundup yet.',
+            }),
+            defineField({
+              name: 'relatedLabel',
+              title: 'Related article link text',
+              type: 'string',
+              description: 'Link text for relatedUrl, e.g. "See our full backpack roundup". Required if relatedUrl is set.',
+            }),
+            defineField({
               name: 'isEditorsPick',
               title: "Editor's pick",
               type: 'boolean',
@@ -172,6 +187,12 @@ export default defineType({
               type: 'string',
               description: 'e.g. "Aug 7–9"',
               validation: (R) => R.required(),
+            }),
+            defineField({
+              name: 'rate',
+              title: 'Sales tax rate',
+              type: 'string',
+              description: 'State-level sales tax rate shoppers skip during the holiday, e.g. "6%". Optional.',
             }),
             defineField({
               name: 'note',

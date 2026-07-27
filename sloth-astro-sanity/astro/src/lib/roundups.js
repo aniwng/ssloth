@@ -23,10 +23,10 @@ const ROUNDUP_PROJECTION = `{
   buyingTips,
   pullQuote,
   products[]{
-    rank, name, subtitle, blurb, examples, image, affiliateUrl, isEditorsPick
+    rank, name, subtitle, blurb, examples, image, affiliateUrl, isEditorsPick, relatedUrl, relatedLabel
   },
   stateDates[]{
-    state, dates, note
+    state, dates, rate, note
   }
 }`
 
