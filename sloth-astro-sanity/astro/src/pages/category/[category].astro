@@ -13,9 +13,10 @@ export async function getStaticPaths() {
 }
 
 const {category, roundups} = Astro.props
+const description = `Slow, deliberate ${category} product roundups from Shopping Sloth — checked against real reviews and testing data, never rushed.`
 ---
 
-<BaseLayout title={`${category} roundups — Shopping Sloth`}>
+<BaseLayout title={`${category} roundups — Shopping Sloth`} description={description}>
   <div class="wrap">
     <div class="page-head">
       <div class="eyebrow">

@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PawIcon from '../components/PawIcon.astro'
 import ProductImage from '../components/ProductImage.astro'
-import {getRoundups, introToHtml, formatMonth, withAffiliateTag} from '../lib/roundups.js'
+import {getRoundups, introToHtml, introToPlainText, formatMonth, withAffiliateTag} from '../lib/roundups.js'
 
 // ONE template for every roundup. New Sanity documents become new pages
 // automatically. If you ever find yourself creating article-2.astro, the
@@ -14,14 +14,74 @@ export async function getStaticPaths() {
 
 const {roundup} = Astro.props
 const intro = introToHtml(roundup.intro)
+const description = introToPlainText(roundup.intro)
 const updated = formatMonth(roundup.updatedAt ?? roundup.publishedAt)
 const products = [...(roundup.products ?? [])].sort((a, b) => a.rank - b.rank)
 const meta = [updated && `updated ${updated}`, roundup.readingMinutes && `${roundup.readingMinutes} min read`]
   .filter(Boolean)
   .join(' · ')
+
+const publishedISO = roundup.publishedAt ? new Date(roundup.publishedAt).toISOString() : undefined
+const modifiedISO = roundup.updatedAt ? new Date(roundup.updatedAt).toISOString() : publishedISO
+const canonicalUrl = new URL(`/${roundup.slug}/`, Astro.site).toString()
+const absoluteImage = roundup.heroImage ? new URL(roundup.heroImage, Astro.site).toString() : undefined
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: roundup.title,
+  description,
+  image: absoluteImage,
+  datePublished: publishedISO,
+  dateModified: modifiedISO,
+  author: {'@type': 'Organization', name: 'Shopping Sloth'},
+  publisher: {'@type': 'Organization', name: 'Shopping Sloth'},
+  mainEntityOfPage: canonicalUrl,
+}
+
+// Ranked roundups double as "best X" lists — Google and answer engines both
+// parse ItemList/Product markup for these directly, which is worth more here
+// than it is on the unranked guides (those aren't naming a ranked winner).
+const itemListJsonLd =
+  roundup.ranked !== false && products.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        itemListElement: products.map((product) => ({
+          '@type': 'ListItem',
+          position: product.rank,
+          item: {
+            '@type': 'Product',
+            name: product.name,
+            description: product.subtitle,
+          },
+        })),
+      }
+    : undefined
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {'@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).toString()},
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: roundup.category,
+      item: new URL(`/category/${roundup.category}/`, Astro.site).toString(),
+    },
+    {'@type': 'ListItem', position: 3, name: roundup.title, item: canonicalUrl},
+  ],
+}
 ---
 
-<BaseLayout title={`${roundup.title} — Shopping Sloth`}>
+<BaseLayout
+  title={`${roundup.title} — Shopping Sloth`}
+  description={description}
+  image={roundup.heroImage}
+  type="article"
+  jsonLd={[articleJsonLd, breadcrumbJsonLd, itemListJsonLd].filter(Boolean)}
+>
   <div class={`wrap cat-${roundup.category}`}>
     <div class="article-head">
       <span class={`tag ${roundup.category}`}>{roundup.category}</span>
@@ -51,7 +111,7 @@ const meta = [updated && `updated ${updated}`, roundup.readingMinutes && `${roun
                     editor's pick
                   </div>
                 )}
-                <div class="entry-name">{product.name}</div>
+                <h2 class="entry-name">{product.name}</h2>
                 <div class="entry-sub">{product.subtitle}</div>
               </div>
               <a
@@ -73,7 +133,7 @@ const meta = [updated && `updated ${updated}`, roundup.readingMinutes && `${roun
         <div class="list">
           {products.map((product) => (
             <div class="list-item">
-              <div class="list-name">{product.name}</div>
+              <h2 class="list-name">{product.name}</h2>
               <div class="entry-sub">{product.subtitle}</div>
               <p class="entry-copy">{product.blurb}</p>
               {product.examples && (

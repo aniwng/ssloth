@@ -4,12 +4,25 @@ import '../styles/style.css'
 const {
   title,
   description = "Every pick here is checked against real reviews and testing data, so you don't have to hurry into a bad purchase.",
+  image,
+  type = 'website',
+  jsonLd,
 } = Astro.props
 
 const path = Astro.url.pathname
 const isHome = path === '/'
 const isAbout = path.startsWith('/about')
 const year = new Date().getFullYear()
+const canonicalUrl = new URL(path, Astro.site)
+const absoluteImage = image ? new URL(image, Astro.site).toString() : undefined
+
+const siteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Shopping Sloth',
+  url: Astro.site?.toString(),
+  description: "Every pick here is checked against real reviews and testing data, so you don't have to hurry into a bad purchase.",
+}
 ---
 
 <!doctype html>
@@ -20,7 +33,27 @@ const year = new Date().getFullYear()
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="canonical" href={new URL(path, Astro.site)} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Shopping Sloth" />
+    {absoluteImage && <meta property="og:image" content={absoluteImage} />}
+    <meta name="twitter:card" content={absoluteImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {absoluteImage && <meta name="twitter:image" content={absoluteImage} />}
+
+    <script type="application/ld+json" set:html={JSON.stringify(siteJsonLd)} />
+    {(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []).map((block) => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
+
     <meta name="google-adsense-account" content="ca-pub-4145026914264633" />
     <script
       async

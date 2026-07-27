@@ -91,6 +91,22 @@ export function introToHtml(intro) {
   })
 }
 
+/**
+ * Portable Text -> plain text, truncated to a meta-description-friendly
+ * length. Used for <meta name="description"> and og:description so every
+ * article gets a unique description instead of all sharing BaseLayout's
+ * generic default — duplicate descriptions across pages hurt SEO.
+ */
+export function introToPlainText(intro, maxLength = 155) {
+  if (!intro) return ''
+  const text = intro
+    .flatMap((block) => block.children?.map((child) => child.text) ?? [])
+    .join(' ')
+    .trim()
+  if (text.length <= maxLength) return text
+  return text.slice(0, maxLength - 1).replace(/\s+\S*$/, '') + '…'
+}
+
 /** "updated jul 2026" — lowercase to match the prototype's voice. */
 export function formatMonth(dateish) {
   if (!dateish) return ''

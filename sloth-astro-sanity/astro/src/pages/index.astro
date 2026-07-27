@@ -8,7 +8,7 @@ const roundups = await getRoundups()
 const latest = roundups.slice(0, 6)
 ---
 
-<BaseLayout title="Shopping Sloth — Slow Picks. Fast Results.">
+<BaseLayout title="Shopping Sloth — Slow Picks. Fast Results." image={latest[0]?.heroImage}>
   <section class="hero">
     <div class="paw-trail" aria-hidden="true"></div>
     <div class="wrap">

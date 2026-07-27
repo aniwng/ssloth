@@ -748,6 +748,7 @@ a { color: inherit; text-decoration: none; }
 .entry-thumb svg { width: 22px; height: 22px; }
 
 .entry-name {
+  margin: 0;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: var(--step-2);
@@ -788,6 +789,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .list-name {
+  margin: 0;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: var(--step-2);
