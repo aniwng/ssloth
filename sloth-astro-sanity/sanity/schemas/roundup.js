@@ -137,19 +137,30 @@ export default defineType({
               description: 'Placeholder "#" until an affiliate program is connected. Unranked roundups skip this.',
             }),
             defineField({
-              name: 'relatedUrl',
-              title: 'Related article link (internal)',
-              type: 'string',
+              name: 'relatedLinks',
+              title: 'Related article links (internal)',
+              type: 'array',
               description:
-                'Optional, unranked roundups only. A site-relative path (e.g. "/top-5-backpacks-for-' +
-                'back-to-school-in-2026/") to a full roundup covering this category — rendered as a small ' +
-                'link under the blurb. Leave empty if there is no matching roundup yet.',
-            }),
-            defineField({
-              name: 'relatedLabel',
-              title: 'Related article link text',
-              type: 'string',
-              description: 'Link text for relatedUrl, e.g. "See our full backpack roundup". Required if relatedUrl is set.',
+                'Optional, unranked roundups only. Site-relative paths (e.g. "/top-5-backpacks-for-' +
+                'back-to-school-in-2026/") to full roundups covering this category — rendered as small ' +
+                'links under the blurb. Leave empty if there is no matching roundup yet.',
+              of: [
+                defineArrayMember({
+                  type: 'object',
+                  name: 'relatedLink',
+                  fields: [
+                    defineField({name: 'url', title: 'URL', type: 'string', validation: (R) => R.required()}),
+                    defineField({
+                      name: 'label',
+                      title: 'Link text',
+                      type: 'string',
+                      description: 'e.g. "See our full backpack roundup"',
+                      validation: (R) => R.required(),
+                    }),
+                  ],
+                  preview: {select: {title: 'label', subtitle: 'url'}},
+                }),
+              ],
             }),
             defineField({
               name: 'isEditorsPick',

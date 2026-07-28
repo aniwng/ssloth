@@ -221,8 +221,10 @@
         "blurb": "Not every state's holiday covers electronics, and the ones that do usually cap the exempt price — so this is the category most worth double-checking against your specific state's rules before you assume a laptop or smart home gadget qualifies.",
         "examples": "everyday laptops, basic tablets, wireless earbuds, smart displays, home printers",
         "image": null,
-        "relatedUrl": "/top-5-home-tech-gadgets-worth-having-in-2026/",
-        "relatedLabel": "See our home tech gadget picks"
+        "relatedLinks": [
+          {"url": "/best-wireless-earbuds-under-100/", "label": "See our wireless earbuds picks"},
+          {"url": "/top-5-home-tech-gadgets-worth-having-in-2026/", "label": "See our home tech gadget picks"}
+        ]
       },
       {
         "rank": 3,
@@ -231,8 +233,9 @@
         "blurb": "Pens, notebooks, binders, and backpacks are typically grouped under one exemption with their own price cap, separate from the clothing cap — worth restocking whether or not anyone in the house is actually heading back to school.",
         "examples": "backpacks, notebooks, binders, pens and highlighters",
         "image": null,
-        "relatedUrl": "/top-5-backpacks-for-back-to-school-in-2026/",
-        "relatedLabel": "See our full backpack roundup"
+        "relatedLinks": [
+          {"url": "/top-5-backpacks-for-back-to-school-in-2026/", "label": "See our full backpack roundup"}
+        ]
       },
       {
         "rank": 4,
@@ -416,5 +419,90 @@
     ],
     "buyingTips": "Check for Matter support before buying anything new — it's become the standard that lets devices from different brands work together without separate apps for each one. Beyond that, start with one or two gadgets that solve an actual annoyance rather than trying to automate the whole house at once; it's a much easier way to tell what's actually worth keeping.",
     "pullQuote": "A smart home doesn't have to be a whole system. Sometimes it's just one lamp that finally turns itself off."
+  },
+  {
+    "_id": "seed-wireless-earbuds-under-100-2026",
+    "title": "Wireless Earbuds Under $100 That Don't Feel Cheap",
+    "slug": "best-wireless-earbuds-under-100",
+    "category": "tech",
+    "publishedAt": "2026-07-27T09:00:00.000Z",
+    "updatedAt": "2026-07-27T09:00:00.000Z",
+    "readingMinutes": 5,
+    "intro": [
+      {
+        "_type": "block",
+        "_key": "intro1",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "_key": "intro1a",
+            "text": "Active noise cancelling used to be the thing that separated a $250 pair of earbuds from a $50 pair. That gap has mostly closed — the noise cancelling, battery life, and app tuning inside most sub-$100 earbuds now would have counted as flagship features a few years ago."
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "_key": "intro2",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "_key": "intro2a",
+            "text": "Every pick here is checked against reviews and testing data from sources like RTings, SoundGuys, and Wirecutter before it makes the list. No rush, just really good picks."
+          }
+        ]
+      }
+    ],
+    "heroImage": "/images/wireless-earbuds-hero.jpg",
+    "products": [
+      {
+        "rank": 1,
+        "name": "Soundcore Space A40 by Anker",
+        "subtitle": "best overall pair under $100",
+        "blurb": "This one keeps showing up near the top of independent noise-cancelling tests in its price range, and the app-based EQ and fit test make it easy to actually dial in — a rare case where the cheaper option doesn't feel like a downgrade.",
+        "image": null,
+        "affiliateUrl": "https://www.amazon.com/dp/B0B1LVC5VZ",
+        "isEditorsPick": true
+      },
+      {
+        "rank": 2,
+        "name": "Sony WF-C710N",
+        "subtitle": "best noise cancelling from a name-brand",
+        "blurb": "Sony's noise cancelling tuning tends to test well against much pricier earbuds, and this is the cheapest pair carrying it — a good pick for anyone who trusts an established audio brand over a newer one.",
+        "image": null,
+        "affiliateUrl": "https://www.amazon.com/dp/B0DWHPBK42",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 3,
+        "name": "Soundcore Liberty 4 NC by Anker",
+        "subtitle": "best battery life",
+        "blurb": "A 50-hour total battery rating with the case, plus wireless charging, makes this the pair least likely to run out mid-week. It also supports hi-res audio codecs that most sub-$100 earbuds skip entirely.",
+        "image": null,
+        "affiliateUrl": "https://www.amazon.com/dp/B0BZV4QFP8",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 4,
+        "name": "JBL Tune Buds",
+        "subtitle": "best for calls and bass",
+        "blurb": "JBL's signature bass-forward tuning is still here, but the bigger upgrade is call quality — multiple mics per earbud cut down on the wind and background noise that usually gives budget earbuds away on a call.",
+        "image": null,
+        "affiliateUrl": "https://www.amazon.com/dp/B0C1QWWZR4",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 5,
+        "name": "TOZO T10",
+        "subtitle": "best ultra-budget pick",
+        "blurb": "One of the best-reviewed earbuds on Amazon for years running, and still under $20 most of the time. It skips noise cancelling entirely, but for anyone who just wants reliable sound and a case that survives a bag, it's hard to beat the price.",
+        "image": null,
+        "affiliateUrl": "https://www.amazon.com/dp/B07J2Z5DBM",
+        "isEditorsPick": false
+      }
+    ],
+    "buyingTips": "Active noise cancelling is the biggest jump in this price range, but it isn't free — it trades some battery life and usually adds a few dollars, so skip it if you mostly listen at a desk. Ear tip size matters more than the spec sheet for how these actually sound; most brands include 3–4 tip sizes, and the wrong fit is the single most common source of \"this bass sounds weak\" complaints.",
+    "pullQuote": "Nobody needs $250 earbuds to hear a podcast at 1.5x speed."
   }
 ]

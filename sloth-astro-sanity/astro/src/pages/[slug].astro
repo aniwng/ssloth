@@ -141,11 +141,11 @@ const breadcrumbJsonLd = {
                   <strong>popular picks:</strong> {product.examples}
                 </p>
               )}
-              {product.relatedUrl && product.relatedLabel && (
-                <a class="list-related" href={product.relatedUrl}>
-                  {product.relatedLabel} →
+              {product.relatedLinks?.map((link) => (
+                <a class="list-related" href={link.url}>
+                  {link.label} →
                 </a>
-              )}
+              ))}
             </div>
           ))}
         </div>
