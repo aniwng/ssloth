@@ -127,7 +127,7 @@ a { color: inherit; text-decoration: none; }
 /* ---------- Category accents ----------
    Muted enough to read as different paper stocks rather than colour-coding. */
 
-.cat-beauty  { --ph-a: #F3E6E2; --ph-b: #E7D3CD; --ph-glow: #FAF3F1; --ph-ink: #8F5548; }
+.cat-health  { --ph-a: #F3E6E2; --ph-b: #E7D3CD; --ph-glow: #FAF3F1; --ph-ink: #8F5548; }
 .cat-tech    { --ph-a: #E5E8EB; --ph-b: #D3D9DE; --ph-glow: #F3F5F7; --ph-ink: #4A5560; }
 .cat-home    { --ph-a: #F0EAE2; --ph-b: #E2D9CD; --ph-glow: #F9F5F0; --ph-ink: #6B5B45; }
 .cat-accessories { --ph-a: #E6EAE3; --ph-b: #D4DACF; --ph-glow: #F4F6F2; --ph-ink: #4F5C46; }
@@ -423,7 +423,7 @@ a { color: inherit; text-decoration: none; }
   background: var(--ph-ink, currentColor);
 }
 
-.tag.beauty::before  { background: #8F5548; }
+.tag.health::before  { background: #8F5548; }
 .tag.tech::before    { background: #4A5560; }
 .tag.home::before    { background: #6B5B45; }
 .tag.accessories::before { background: #4F5C46; }

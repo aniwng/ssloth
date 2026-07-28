@@ -3,7 +3,7 @@
     "_id": "seed-sunscreens-body-2026",
     "title": "Top 5 Sunscreens for Your Body in 2026",
     "slug": "top-5-sunscreens-for-your-body-in-2026",
-    "category": "beauty",
+    "category": "health",
     "publishedAt": "2026-07-14T09:00:00.000Z",
     "updatedAt": "2026-07-14T09:00:00.000Z",
     "readingMinutes": 6,
@@ -253,66 +253,81 @@
       {
         "state": "Florida",
         "dates": "Jul 20 – Aug 20",
+        "rate": "6%",
         "note": "longest window of any state"
       },
       {
         "state": "New Mexico",
-        "dates": "Jul 31 – Aug 2"
+        "dates": "Jul 31 – Aug 2",
+        "rate": "4.875%"
       },
       {
         "state": "Tennessee",
-        "dates": "Jul 31 – Aug 2"
+        "dates": "Jul 31 – Aug 2",
+        "rate": "7%"
       },
       {
         "state": "West Virginia",
-        "dates": "Jul 31 – Aug 3"
+        "dates": "Jul 31 – Aug 3",
+        "rate": "6%"
       },
       {
         "state": "Arkansas",
-        "dates": "Aug 1 – 2"
+        "dates": "Aug 1 – 2",
+        "rate": "6.5%"
       },
       {
         "state": "Iowa",
-        "dates": "Aug 7 – 8"
+        "dates": "Aug 7 – 8",
+        "rate": "6%"
       },
       {
         "state": "Missouri",
-        "dates": "Aug 7 – 9"
+        "dates": "Aug 7 – 9",
+        "rate": "4.225%"
       },
       {
         "state": "Ohio",
-        "dates": "Aug 7 – 9"
+        "dates": "Aug 7 – 9",
+        "rate": "5.75%"
       },
       {
         "state": "Oklahoma",
-        "dates": "Aug 7 – 9"
+        "dates": "Aug 7 – 9",
+        "rate": "4.5%"
       },
       {
         "state": "South Carolina",
-        "dates": "Aug 7 – 9"
+        "dates": "Aug 7 – 9",
+        "rate": "6%"
       },
       {
         "state": "Texas",
-        "dates": "Aug 7 – 9"
+        "dates": "Aug 7 – 9",
+        "rate": "6.25%"
       },
       {
         "state": "Virginia",
-        "dates": "Aug 7 – 9"
+        "dates": "Aug 7 – 9",
+        "rate": "5.3%"
       },
       {
         "state": "Massachusetts",
-        "dates": "Aug 8 – 9"
+        "dates": "Aug 8 – 9",
+        "rate": "6.25%"
       },
       {
         "state": "Maryland",
-        "dates": "Aug 9 – 15"
+        "dates": "Aug 9 – 15",
+        "rate": "6%"
       },
       {
         "state": "Connecticut",
-        "dates": "Aug 16 – 22"
+        "dates": "Aug 16 – 22",
+        "rate": "6.35%"
       }
     ],
-    "buyingTips": "Exemptions and price caps vary by state, so it's worth checking your own state's specific list before assuming a category qualifies. Buying online usually still counts as long as the order is placed and paid for during the window, even if delivery comes later — but check your retailer's tax settings to be sure it's applying the exemption correctly.",
+    "buyingTips": "Exemptions and price caps vary by state, so it's worth checking your own state's specific list before assuming a category qualifies. Buying online usually still counts as long as the order is placed and paid for during the window, even if delivery comes later — but check your retailer's tax settings to be sure it's applying the exemption correctly. The rates listed above are each state's base sales tax rate; many cities and counties add their own local tax on top, so actual savings may run higher.",
     "pullQuote": "A tax holiday won't make a bad purchase good. It'll just make it a little cheaper."
   },
   {

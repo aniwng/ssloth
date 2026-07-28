@@ -1,4 +1,4 @@
-export const CATEGORIES = ['beauty', 'tech', 'home', 'accessories']
+export const CATEGORIES = ['health', 'tech', 'home', 'accessories']
 
 /**
  * The shape Claude must return, enforced by the API via

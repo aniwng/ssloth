@@ -2,7 +2,7 @@ import {toHTML} from '@portabletext/to-html'
 import {sanityClient, sanityConfigured} from './sanityClient.js'
 import seedRoundups from './seed/roundups.json'
 
-export const CATEGORIES = ['beauty', 'tech', 'home', 'accessories']
+export const CATEGORIES = ['health', 'tech', 'home', 'accessories']
 
 // Amazon Associates ID. Not sensitive — it's designed to appear in public
 // URLs — so it's safe as a plain default here rather than requiring a CI

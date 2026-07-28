@@ -1,6 +1,6 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
-export const CATEGORIES = ['beauty', 'tech', 'home', 'accessories']
+export const CATEGORIES = ['health', 'tech', 'home', 'accessories']
 
 /**
  * The roundup document — the only content type on the site.
