@@ -735,6 +735,10 @@ a { color: inherit; text-decoration: none; }
 
 .entry.pick .rank-num { color: var(--accent); opacity: 1; font-weight: 500; }
 
+/* Products that aren't directly comparable (see roundup.showRankNumbers) —
+   same .entry markup, just no numbered badge and one fewer grid column. */
+.rankings.no-rank .entry { grid-template-columns: minmax(0, 1fr) auto; }
+
 .entry-thumb {
   width: 84px;
   height: 84px;
@@ -990,6 +994,7 @@ a { color: inherit; text-decoration: none; }
     column-gap: var(--space-3);
     padding: var(--space-4) 0;
   }
+  .rankings.no-rank .entry { grid-template-columns: minmax(0, 1fr); }
   .entry.pick { padding: var(--space-4) var(--space-3); margin: 0 calc(var(--space-3) * -1); }
   .entry-thumb { width: 60px; height: 60px; }
   .rank-num { font-size: 28px; }

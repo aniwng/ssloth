@@ -62,6 +62,7 @@ async function main() {
       intro: roundup.intro,
       ...(heroImage ? {heroImage} : {}),
       ranked: roundup.ranked ?? true,
+      showRankNumbers: roundup.showRankNumbers ?? true,
       products: roundup.products.map((product, i) => ({
         _type: 'product',
         _key: `product${i}`,

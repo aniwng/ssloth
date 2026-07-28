@@ -49,7 +49,7 @@ const itemListJsonLd =
         '@type': 'ItemList',
         itemListElement: products.map((product) => ({
           '@type': 'ListItem',
-          position: product.rank,
+          ...(roundup.showRankNumbers !== false ? {position: product.rank} : {}),
           item: {
             '@type': 'Product',
             name: product.name,
@@ -97,10 +97,10 @@ const breadcrumbJsonLd = {
 
     {
       roundup.ranked !== false ? (
-        <div class="rankings">
+        <div class={roundup.showRankNumbers === false ? 'rankings no-rank' : 'rankings'}>
           {products.map((product) => (
             <div class={product.isEditorsPick ? 'entry pick' : 'entry'}>
-              <div class="rank-num">{product.rank}</div>
+              {roundup.showRankNumbers !== false && <div class="rank-num">{product.rank}</div>}
               <div class="entry-thumb ph">
                 <ProductImage source={product.image} width={200} height={200} alt={product.name} />
               </div>

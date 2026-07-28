@@ -509,10 +509,11 @@
     "_id": "seed-portable-fans-summer-2026",
     "title": "Portable Fans That Won't Die Halfway Through Summer",
     "slug": "best-portable-fans-for-summer",
-    "category": "accessories",
+    "category": "home",
     "publishedAt": "2026-07-28T09:00:00.000Z",
     "updatedAt": "2026-07-28T09:00:00.000Z",
     "readingMinutes": 5,
+    "showRankNumbers": false,
     "intro": [
       {
         "_type": "block",

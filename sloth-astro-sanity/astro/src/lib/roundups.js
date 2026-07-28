@@ -20,6 +20,7 @@ const ROUNDUP_PROJECTION = `{
   intro,
   heroImage,
   ranked,
+  showRankNumbers,
   buyingTips,
   pullQuote,
   products[]{

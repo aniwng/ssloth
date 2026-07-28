@@ -83,6 +83,17 @@ export default defineType({
         'array below; toggling this only changes how [slug].astro renders it.',
     }),
     defineField({
+      name: 'showRankNumbers',
+      title: 'Show 1-5 rank numbers?',
+      type: 'boolean',
+      initialValue: true,
+      description:
+        'Only applies when "Ranked roundup?" is on. Turn off when the products aren\'t really ' +
+        'comparable to each other head-to-head (e.g. a handheld fan vs. a tower fan vs. a neck fan — ' +
+        'different products for different situations, not a best-to-worst ladder). Keeps the editor\'s ' +
+        'pick badge and buy buttons, just drops the numbered badge that implies a strict ranking.',
+    }),
+    defineField({
       name: 'products',
       title: 'Products',
       type: 'array',
