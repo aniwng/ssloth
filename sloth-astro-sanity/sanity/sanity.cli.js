@@ -1,4 +1,6 @@
-import {defineCliConfig} from 'sanity/cli'
+import sanityCli from 'sanity/cli'
+
+const {defineCliConfig} = sanityCli
 
 export default defineCliConfig({
   api: {

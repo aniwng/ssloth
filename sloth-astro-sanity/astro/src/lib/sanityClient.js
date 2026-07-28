@@ -4,6 +4,12 @@ import imageUrlBuilder from '@sanity/image-url'
 const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID
 const dataset = import.meta.env.PUBLIC_SANITY_DATASET || 'production'
 const apiVersion = import.meta.env.PUBLIC_SANITY_API_VERSION || '2024-01-01'
+// Server/build-time only — deliberately not PUBLIC_-prefixed so Vite never
+// ships it to the browser. The "production" dataset denies anonymous reads
+// on the roundup type even though it's marked public, so a scoped Viewer
+// token is what actually makes reads work; see SANITY_READ_TOKEN in
+// .env.example for the full story.
+const readToken = import.meta.env.SANITY_READ_TOKEN
 
 /**
  * True once a real Sanity project exists in .env. Until then the site builds
@@ -17,9 +23,12 @@ export const sanityClient = sanityConfigured
       projectId,
       dataset,
       apiVersion,
-      // Static build: read published documents straight from the CDN.
-      useCdn: true,
+      // A token forces a live (non-CDN) read — appropriate here since the
+      // token is the whole reason reads work at all, not an optional speed
+      // trade-off.
+      useCdn: !readToken,
       perspective: 'published',
+      ...(readToken ? {token: readToken} : {}),
     })
   : null
 

@@ -32,14 +32,15 @@ jobs:
         working-directory: sloth-astro-sanity/astro
         run: npm ci
 
-      # PUBLIC_SANITY_PROJECT_ID is deliberately not set here yet — the
-      # Sanity project (364itju4) has no documents in it yet, and setting
-      # this flips the site from the seed content to querying Sanity, which
-      # would ship an empty site. Add it back as a repo secret once content
-      # has been migrated into Sanity (see CLAUDE.md task 2).
+      # The "production" dataset denies anonymous reads on the roundup
+      # document type even when set to public, so a Viewer-scoped read
+      # token is required — see SANITY_READ_TOKEN in .env.example.
       - name: Build
         working-directory: sloth-astro-sanity/astro
         run: npm run build
+        env:
+          PUBLIC_SANITY_PROJECT_ID: ${{ secrets.PUBLIC_SANITY_PROJECT_ID }}
+          SANITY_READ_TOKEN: ${{ secrets.SANITY_READ_TOKEN }}
 
       - uses: actions/upload-pages-artifact@v3
         with:

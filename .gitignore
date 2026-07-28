@@ -11,6 +11,7 @@ dist/
 
 # Sanity Studio build output
 sloth-astro-sanity/sanity/dist/
+sloth-astro-sanity/sanity/.sanity/
 
 # Dry-run drafts
 sloth-astro-sanity/scripts/out/*
