@@ -504,5 +504,90 @@
     ],
     "buyingTips": "Active noise cancelling is the biggest jump in this price range, but it isn't free — it trades some battery life and usually adds a few dollars, so skip it if you mostly listen at a desk. Ear tip size matters more than the spec sheet for how these actually sound; most brands include 3–4 tip sizes, and the wrong fit is the single most common source of \"this bass sounds weak\" complaints.",
     "pullQuote": "Nobody needs $250 earbuds to hear a podcast at 1.5x speed."
+  },
+  {
+    "_id": "seed-portable-fans-summer-2026",
+    "title": "Portable Fans That Won't Die Halfway Through Summer",
+    "slug": "best-portable-fans-for-summer",
+    "category": "accessories",
+    "publishedAt": "2026-07-28T09:00:00.000Z",
+    "updatedAt": "2026-07-28T09:00:00.000Z",
+    "readingMinutes": 5,
+    "intro": [
+      {
+        "_type": "block",
+        "_key": "intro1",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "_key": "intro1a",
+            "text": "\"Portable fan\" covers a lot of very different objects — a handheld fan for a commute, a neck fan for yard work, and a battery-powered tower fan for a bedroom aren't really substitutes for each other. So this isn't a ladder from best to worst. It's five different problems, each paired with the fan built to handle it."
+          }
+        ]
+      },
+      {
+        "_type": "block",
+        "_key": "intro2",
+        "style": "normal",
+        "children": [
+          {
+            "_type": "span",
+            "_key": "intro2a",
+            "text": "Every pick below is checked against its Amazon review history before it makes the list — rating alone doesn't mean much, but a rating that holds up across tens of thousands of reviews does. Recognizable brands got priority over lookalike listings with a few hundred reviews and a stock photo."
+          }
+        ]
+      }
+    ],
+    "heroImage": "/images/portable-fans-hero.jpg",
+    "products": [
+      {
+        "rank": 1,
+        "name": "Shark FlexBreeze 2-in-1 Pedestal and Tabletop Fan",
+        "subtitle": "the pick if you only want one fan",
+        "blurb": "Shark's name recognition alone sets this apart from most of the category, and the fan backs it up — it converts between a full pedestal and a tabletop unit, runs corded or cordless for up to 24 hours, and is rated for both indoor and outdoor use. It won't fit in a bag like the others on this list, but it's the closest thing here to an all-purpose replacement for a house fan.",
+        "image": null,
+        "affiliateUrl": "https://www.amazon.com/dp/B0DQXC6KS1",
+        "isEditorsPick": true
+      },
+      {
+        "rank": 2,
+        "name": "DREO Tower Fan for Bedroom",
+        "subtitle": "best for quiet all-day cooling",
+        "blurb": "DREO has built a real reputation in home cooling over the last few years, and this tower fan is a good example why — 28dB at its quietest setting is genuinely bedroom-friendly, and the 90° oscillation covers a room without needing to be repositioned every hour.",
+        "image": null,
+        "affiliateUrl": "https://www.amazon.com/dp/B0DZ6VRPT7",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 3,
+        "name": "JISULIFE 3-in-1 Portable Fan",
+        "subtitle": "best budget grab-and-go pick",
+        "blurb": "JISULIFE isn't a big-box name, but it's the closest thing to one inside the portable fan category specifically — this exact model has tens of thousands of reviews holding steady at 4.6 stars. It doubles as a phone power bank and a flashlight, which makes it an easy one to toss in a bag and forget about until it's needed.",
+        "image": null,
+        "affiliateUrl": "https://www.amazon.com/dp/B097BJKSHM",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 4,
+        "name": "FrSara Neck Fan",
+        "subtitle": "best hands-free pick",
+        "blurb": "Hands-free cooling for anyone doing yard work, walking a dog, or standing in line outdoors. It blows air from both sides of the neckband instead of just one, and the low-profile design is built specifically to avoid catching on long hair — a common complaint with cheaper neck fans.",
+        "image": null,
+        "affiliateUrl": "https://www.amazon.com/dp/B08FZJKCJ9",
+        "isEditorsPick": false
+      },
+      {
+        "rank": 5,
+        "name": "Koonie 8\" Clip-on Fan",
+        "subtitle": "best for strollers, desks, and tight spaces",
+        "blurb": "A sturdy clamp and a real 10,000mAh battery separate this from the flimsier clip fans that show up in the same search results. It holds onto a stroller rail, a treadmill console, or a desk edge without sliding, and the airflow is noticeably stronger than its size suggests.",
+        "image": null,
+        "affiliateUrl": "https://www.amazon.com/dp/B08866RDYK",
+        "isEditorsPick": false
+      }
+    ],
+    "buyingTips": "Speed settings on the box are marketing — battery-powered fans vary a lot more in actual airflow than the \"5 speeds\" label suggests, so runtime and reviewed airflow matter more than the spec sheet. A bigger battery (measured in mAh) roughly tracks with how long a fan lasts on its highest setting, which is usually the one people actually pick. Outdoor misting fans need a water refill and aren't on this list for that reason — they're a different category from a straight battery fan.",
+    "pullQuote": "No fan has ever fixed summer. It just makes summer stop yelling at you."
   }
 ]
