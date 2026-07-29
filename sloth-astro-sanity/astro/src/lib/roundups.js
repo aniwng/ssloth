@@ -35,17 +35,23 @@ const ROUNDUP_PROJECTION = `{
  * Every roundup, newest first.
  *
  * With no Sanity project configured this falls back to the checked-in seed
- * content so the site still builds. That fallback is a development
- * convenience, not the content model — once PUBLIC_SANITY_PROJECT_ID is set,
- * Sanity is the only source of truth and this file never reads the seed again.
+ * content so the site still builds — a development convenience. Once
+ * PUBLIC_SANITY_PROJECT_ID is set, Sanity is the source of truth, but if the
+ * fetch itself fails (outage, permissions, network) this also falls back to
+ * the seed rather than failing the build, so the site stays up on stale
+ * content instead of going down entirely.
  */
 export async function getRoundups() {
   if (!sanityConfigured) return sortRoundups(seedRoundups)
 
-  const roundups = await sanityClient.fetch(
-    `*[_type == "roundup" && defined(slug.current)] | order(publishedAt desc) ${ROUNDUP_PROJECTION}`,
-  )
-  return sortRoundups(roundups)
+  try {
+    const roundups = await sanityClient.fetch(
+      `*[_type == "roundup" && defined(slug.current)] | order(publishedAt desc) ${ROUNDUP_PROJECTION}`,
+    )
+    return sortRoundups(roundups)
+  } catch {
+    return sortRoundups(seedRoundups)
+  }
 }
 
 export async function getRoundup(slug) {
