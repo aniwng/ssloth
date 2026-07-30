@@ -867,8 +867,13 @@ a { color: inherit; text-decoration: none; }
 .entry.pick .rank-num { color: var(--accent); opacity: 1; font-weight: 500; }
 
 /* Products that aren't directly comparable (see roundup.showRankNumbers) —
-   same .entry markup, just no numbered badge and one fewer grid column. */
+   same .entry markup, just no numbered badge and one fewer grid column.
+   .entry-copy also needs to span both columns here (see its own comment) —
+   left at the ranked layout's "2 / -1" it would share the button's auto
+   column and inflate that column to the blurb's unwrapped max-content
+   width, stretching the button with it. */
 .rankings.no-rank .entry { grid-template-columns: minmax(0, 1fr) auto; }
+.rankings.no-rank .entry-copy { grid-column: 1 / -1; }
 
 .entry-thumb {
   width: 84px;
