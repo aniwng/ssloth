@@ -11,6 +11,12 @@ const roundups = await getRoundups()
 const [featured, ...rest] = roundups
 const latest = rest.slice(0, 6)
 const featuredUpdated = featured ? formatMonth(featured.updatedAt ?? featured.publishedAt) : null
+
+// Search covers every roundup, not just the handful rendered on this page —
+// otherwise a query for something in the archive would come back empty. The
+// index is small (title/category/slug only) and inlined rather than fetched,
+// since the whole site is static and this avoids a runtime API to maintain.
+const searchIndex = roundups.map((r) => ({slug: r.slug, title: r.title, category: r.category}))
 ---
 
 <BaseLayout title="Shopping Sloth — Slow Picks. Fast Results." image={featured?.heroImage}>
@@ -30,9 +36,20 @@ const featuredUpdated = featured ? formatMonth(featured.updatedAt ?? featured.pu
               <circle cx="11" cy="11" r="7"></circle>
               <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
             </svg>
-            <input type="text" placeholder="search for a product roundup" aria-label="Search roundups" data-search />
+            <input
+              type="text"
+              placeholder="search for a product roundup"
+              aria-label="Search roundups"
+              autocomplete="off"
+              role="combobox"
+              aria-expanded="false"
+              aria-controls="search-dropdown"
+              data-search
+            />
           </label>
+          <div class="search-dropdown" id="search-dropdown" role="listbox" data-search-dropdown hidden></div>
         </div>
+        <script type="application/json" data-search-index set:html={JSON.stringify(searchIndex)} />
         <nav class="hero-cats" aria-label="Categories">
           {
             CATEGORIES.map((category) => (
@@ -46,7 +63,7 @@ const featuredUpdated = featured ? formatMonth(featured.updatedAt ?? featured.pu
 
       {
         featured && (
-          <a class={`featured cat-${featured.category}`} href={`/${featured.slug}/`} data-searchable>
+          <a class={`featured cat-${featured.category}`} href={`/${featured.slug}/`}>
             <div class={featured.heroImage ? 'featured-img' : 'featured-img ph'}>
               <ProductImage source={featured.heroImage} width={880} height={550} alt={featured.title} eager />
             </div>
@@ -82,7 +99,7 @@ const featuredUpdated = featured ? formatMonth(featured.updatedAt ?? featured.pu
       </div>
       {
         latest.length ? (
-          <div class="grid" data-results>
+          <div class="grid">
             {latest.map((roundup) => (
               <RoundupCard roundup={roundup} />
             ))}
@@ -94,7 +111,6 @@ const featuredUpdated = featured ? formatMonth(featured.updatedAt ?? featured.pu
           </div>
         )
       }
-      <p class="no-results" data-no-results hidden>Nothing matches that search — try a broader word.</p>
     </div>
   </section>
 
@@ -123,21 +139,69 @@ const featuredUpdated = featured ? formatMonth(featured.updatedAt ?? featured.pu
   </section>
 
   <script>
-    // Client-side filter over the rendered cards. Deliberately dumb — no index,
-    // no search service — until there are enough roundups to need one. The
-    // featured card in the hero is included so search covers every roundup.
+    // Typeahead dropdown under the search box — deliberately dumb (substring
+    // match over an inlined title/category list, no search service) until
+    // there are enough roundups to need more. Results are real links, not a
+    // filter over the page's own content, so this doesn't disturb "more
+    // roundups" below and covers the whole archive, not just what's rendered
+    // on this page.
     const input = document.querySelector('[data-search]')
-    const cards = document.querySelectorAll('[data-searchable]')
-    const noResults = document.querySelector('[data-no-results]')
-    input?.addEventListener('input', () => {
-      const q = input.value.trim().toLowerCase()
-      let shown = 0
-      cards.forEach((card) => {
-        const hit = !q || card.textContent.toLowerCase().includes(q)
-        card.hidden = !hit
-        if (hit) shown++
-      })
-      if (noResults) noResults.hidden = shown > 0
+    const dropdown = document.querySelector('[data-search-dropdown]')
+    const indexEl = document.querySelector('[data-search-index]')
+    const index = indexEl ? JSON.parse(indexEl.textContent) : []
+
+    const CATEGORY_LABEL = {health: 'health', tech: 'tech', home: 'home', accessories: 'accessories'}
+
+    function render(query) {
+      const q = query.trim().toLowerCase()
+      if (!q) return close()
+
+      const matches = index
+        .filter((r) => r.title.toLowerCase().includes(q) || r.category.toLowerCase().includes(q))
+        .slice(0, 8)
+
+      dropdown.innerHTML = matches.length
+        ? matches
+            .map(
+              (r) => `
+                <a class="search-result" href="/${r.slug}/" role="option">
+                  <span class="search-result-title">${escapeHtml(r.title)}</span>
+                  <span class="tag ${r.category}">${escapeHtml(CATEGORY_LABEL[r.category] ?? r.category)}</span>
+                </a>
+              `,
+            )
+            .join('')
+        : `<p class="search-empty">Nothing matches that search — try a broader word.</p>`
+
+      open()
+    }
+
+    function open() {
+      dropdown.hidden = false
+      input.setAttribute('aria-expanded', 'true')
+    }
+
+    function close() {
+      dropdown.hidden = true
+      input.setAttribute('aria-expanded', 'false')
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'})[c])
+    }
+
+    input?.addEventListener('input', () => render(input.value))
+    input?.addEventListener('focus', () => {
+      if (input.value.trim()) render(input.value)
+    })
+
+    document.addEventListener('click', (e) => {
+      if (!(e.target instanceof Node)) return
+      if (!dropdown.contains(e.target) && e.target !== input) close()
+    })
+
+    input?.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close()
     })
   </script>
 </BaseLayout>

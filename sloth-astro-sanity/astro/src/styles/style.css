@@ -308,7 +308,7 @@ a { color: inherit; text-decoration: none; }
   font-size: var(--step-1);
 }
 
-.search { display: flex; }
+.search { display: flex; position: relative; }
 
 .search label {
   position: relative;
@@ -344,6 +344,54 @@ a { color: inherit; text-decoration: none; }
 
 .search input::placeholder { color: var(--muted); }
 .search input:focus { border-bottom-color: var(--accent); }
+
+/* Typeahead dropdown — sits below the input rather than filtering "more
+   roundups" further down the page, so search results and the page's own
+   content never overlap or fight for the same space. */
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-1);
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.search-dropdown[hidden] { display: none; }
+
+.search-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  transition: background var(--dur-slow) var(--ease-slow);
+}
+
+.search-result:hover, .search-result:focus-visible { background: var(--paper-sunk); }
+
+.search-result-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-0);
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.search-empty {
+  padding: var(--space-3);
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--step--1);
+  text-align: center;
+}
 
 /* Category shortcuts in the hero — the full .cat-row list still lives further
    down the page; these exist so navigation is reachable without scrolling. */
@@ -1144,15 +1192,6 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
   color: var(--muted);
 }
-
-/* Shown only when a search filters every card out. */
-.no-results {
-  padding: var(--space-5) 0 0;
-  text-align: center;
-  color: var(--muted);
-}
-
-.no-results[hidden] { display: none; }
 
 .draft-flag {
   display: inline-block;
