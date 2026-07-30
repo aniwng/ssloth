@@ -14,8 +14,22 @@ import {imageUrl} from '../lib/sanityClient.js'
 // per-product thumbnails are hidden entirely for now (see .entry-thumb in
 // style.css) rather than using stock photos, since those would need to
 // depict the exact named product, not just the category.
-const {source, width = 800, height, alt = ''} = Astro.props
+// `eager` opts an image out of lazy loading — pass it for anything that
+// renders above the fold (the homepage's featured roundup, an article hero),
+// since lazy-loading the LCP element delays the largest paint for no gain.
+const {source, width = 800, height, alt = '', eager = false} = Astro.props
 const url = imageUrl(source, {width, height})
 ---
 
-{url ? <img src={url} alt={source?.alt ?? alt} loading="lazy" /> : <PawIcon size={40} />}
+{
+  url ? (
+    <img
+      src={url}
+      alt={source?.alt ?? alt}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : undefined}
+    />
+  ) : (
+    <PawIcon size={40} />
+  )
+}

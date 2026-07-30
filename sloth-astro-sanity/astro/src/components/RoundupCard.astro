@@ -6,7 +6,7 @@ const {roundup} = Astro.props
 const updated = formatMonth(roundup.updatedAt ?? roundup.publishedAt)
 ---
 
-<a class={`card cat-${roundup.category}`} href={`/${roundup.slug}/`}>
+<a class={`card cat-${roundup.category}`} href={`/${roundup.slug}/`} data-searchable>
   <div class={roundup.heroImage ? 'card-img' : 'card-img ph'}>
     <ProductImage source={roundup.heroImage} width={640} height={340} alt={roundup.title} />
   </div>

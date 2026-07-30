@@ -12,6 +12,7 @@ const {
 const path = Astro.url.pathname
 const isHome = path === '/'
 const isAbout = path.startsWith('/about')
+const isArchive = path.startsWith('/roundups')
 const year = new Date().getFullYear()
 const canonicalUrl = new URL(path, Astro.site)
 const absoluteImage = image ? new URL(image, Astro.site).toString() : undefined
@@ -79,6 +80,7 @@ const siteJsonLd = {
         </a>
         <nav class="nav">
           <a href="/" class={isHome ? 'is-current' : undefined}>home</a>
+          <a href="/roundups/" class={isArchive ? 'is-current' : undefined}>roundups</a>
           <a href="/#categories">categories</a>
           <a href="/about/" class={isAbout ? 'is-current' : undefined}>about</a>
         </nav>
@@ -106,6 +108,7 @@ const siteJsonLd = {
           </div>
           <nav class="footer-nav">
             <a href="/">home</a>
+            <a href="/roundups/">all roundups</a>
             <a href="/#categories">categories</a>
             <a href="/about/">about</a>
           </nav>

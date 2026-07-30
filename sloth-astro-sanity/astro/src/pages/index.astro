@@ -1,32 +1,69 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PawIcon from '../components/PawIcon.astro'
+import ProductImage from '../components/ProductImage.astro'
 import RoundupCard from '../components/RoundupCard.astro'
-import {getRoundups, CATEGORIES} from '../lib/roundups.js'
+import {getRoundups, CATEGORIES, formatMonth} from '../lib/roundups.js'
 
 const roundups = await getRoundups()
-const latest = roundups.slice(0, 6)
+// The newest roundup is promoted into the hero so the fold carries real
+// content, not just a tagline. The grid below picks up from the second.
+const [featured, ...rest] = roundups
+const latest = rest.slice(0, 6)
+const featuredUpdated = featured ? formatMonth(featured.updatedAt ?? featured.publishedAt) : null
 ---
 
-<BaseLayout title="Shopping Sloth — Slow Picks. Fast Results." image={latest[0]?.heroImage}>
+<BaseLayout title="Shopping Sloth — Slow Picks. Fast Results." image={featured?.heroImage}>
   <section class="hero">
     <div class="paw-trail" aria-hidden="true"></div>
-    <div class="wrap">
-      <div class="eyebrow">
-        <PawIcon size={12} />
-        no rush, just really good picks
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <PawIcon size={12} />
+          no rush, just really good picks
+        </div>
+        <h1>Slow picks.<br />Fast results.</h1>
+        <p>Every pick here is checked against real reviews and testing data, so you don't have to hurry into a bad purchase.</p>
+        <div class="search">
+          <label>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
+            <input type="text" placeholder="search for a product roundup" aria-label="Search roundups" data-search />
+          </label>
+        </div>
+        <nav class="hero-cats" aria-label="Categories">
+          {
+            CATEGORIES.map((category) => (
+              <a class={`hero-cat cat-${category}`} href={`/category/${category}/`}>
+                {category}
+              </a>
+            ))
+          }
+        </nav>
       </div>
-      <h1>Slow picks.<br />Fast results.</h1>
-      <p>Every pick here is checked against real reviews and testing data, so you don't have to hurry into a bad purchase.</p>
-      <div class="search">
-        <label>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="7"></circle>
-            <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
-          </svg>
-          <input type="text" placeholder="search for a product roundup" aria-label="Search roundups" data-search />
-        </label>
-      </div>
+
+      {
+        featured && (
+          <a class={`featured cat-${featured.category}`} href={`/${featured.slug}/`} data-searchable>
+            <div class={featured.heroImage ? 'featured-img' : 'featured-img ph'}>
+              <ProductImage source={featured.heroImage} width={880} height={550} alt={featured.title} eager />
+            </div>
+            <div class="featured-body">
+              <div class="featured-flag">
+                <PawIcon size={11} />
+                newest roundup
+              </div>
+              <div class="featured-title">{featured.title}</div>
+              <div class="featured-meta">
+                <span class={`tag ${featured.category}`}>{featured.category}</span>
+                {featuredUpdated && <span class="card-meta">updated {featuredUpdated}</span>}
+              </div>
+            </div>
+          </a>
+        )
+      }
     </div>
   </section>
 
@@ -34,7 +71,14 @@ const latest = roundups.slice(0, 6)
     <div class="wrap">
       <div class="section-head">
         <PawIcon size={13} />
-        <h2>latest roundups</h2>
+        <h2>more roundups</h2>
+        {
+          roundups.length > latest.length + 1 && (
+            <a class="section-link" href="/roundups/">
+              view all {roundups.length} <span aria-hidden="true">→</span>
+            </a>
+          )
+        }
       </div>
       {
         latest.length ? (
@@ -50,6 +94,7 @@ const latest = roundups.slice(0, 6)
           </div>
         )
       }
+      <p class="no-results" data-no-results hidden>Nothing matches that search — try a broader word.</p>
     </div>
   </section>
 
@@ -79,14 +124,20 @@ const latest = roundups.slice(0, 6)
 
   <script>
     // Client-side filter over the rendered cards. Deliberately dumb — no index,
-    // no search service — until there are enough roundups to need one.
+    // no search service — until there are enough roundups to need one. The
+    // featured card in the hero is included so search covers every roundup.
     const input = document.querySelector('[data-search]')
-    const grid = document.querySelector('[data-results]')
+    const cards = document.querySelectorAll('[data-searchable]')
+    const noResults = document.querySelector('[data-no-results]')
     input?.addEventListener('input', () => {
       const q = input.value.trim().toLowerCase()
-      grid?.querySelectorAll('.card').forEach((card) => {
-        card.hidden = q ? !card.textContent.toLowerCase().includes(q) : false
+      let shown = 0
+      cards.forEach((card) => {
+        const hit = !q || card.textContent.toLowerCase().includes(q)
+        card.hidden = !hit
+        if (hit) shown++
       })
+      if (noResults) noResults.hidden = shown > 0
     })
   </script>
 </BaseLayout>

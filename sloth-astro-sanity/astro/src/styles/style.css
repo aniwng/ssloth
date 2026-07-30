@@ -253,8 +253,17 @@ a { color: inherit; text-decoration: none; }
 .hero {
   position: relative;
   overflow: hidden;
-  padding: var(--space-7) 0 var(--space-6);
-  text-align: center;
+  padding: var(--space-5) 0 var(--space-6);
+}
+
+/* Two columns: the pitch on the left, the newest roundup on the right. The
+   hero used to be a full-viewport tagline, which pushed every actual article
+   below the fold — the split keeps the voice but puts real content in view. */
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: var(--space-6);
+  align-items: center;
 }
 
 /* Barely-there warmth. Minimal means the whitespace carries the page. */
@@ -284,27 +293,27 @@ a { color: inherit; text-decoration: none; }
 .hero h1 {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: var(--step-5);
-  line-height: 0.98;
+  font-size: var(--step-4);
+  line-height: 1.0;
   letter-spacing: -0.035em;
-  margin: 0 0 var(--space-4);
+  margin: 0 0 var(--space-3);
   color: var(--ink);
   text-wrap: balance;
 }
 
 .hero p {
-  max-width: 44ch;
-  margin: 0 auto var(--space-5);
+  max-width: 42ch;
+  margin: 0 0 var(--space-4);
   color: var(--ink-soft);
   font-size: var(--step-1);
 }
 
-.search { display: flex; justify-content: center; }
+.search { display: flex; }
 
 .search label {
   position: relative;
   display: block;
-  width: min(400px, 100%);
+  width: 100%;
 }
 
 .search svg {
@@ -336,6 +345,110 @@ a { color: inherit; text-decoration: none; }
 .search input::placeholder { color: var(--muted); }
 .search input:focus { border-bottom-color: var(--accent); }
 
+/* Category shortcuts in the hero — the full .cat-row list still lives further
+   down the page; these exist so navigation is reachable without scrolling. */
+.hero-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.hero-cat {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 13px 5px 11px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+  transition:
+    border-color var(--dur-slow) var(--ease-slow),
+    color var(--dur-slow) var(--ease-slow),
+    background var(--dur-slow) var(--ease-slow);
+}
+
+.hero-cat::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ph-ink, currentColor);
+}
+
+.hero-cat:hover, .hero-cat:focus-visible {
+  border-color: var(--line-strong);
+  background: var(--paper-sunk);
+  color: var(--ink);
+}
+
+/* ---------- Featured roundup (hero) ---------- */
+
+.featured {
+  display: block;
+  transition: transform var(--dur-slow) var(--ease-slow);
+}
+
+.featured[hidden] { display: none; }
+
+.featured:hover, .featured:focus-within { transform: translateY(-3px); }
+.featured:hover .ph svg { transform: scale(1.07); }
+
+.featured-img {
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.featured-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.featured-img svg { width: 34px; height: 34px; }
+
+.featured-body {
+  padding: var(--space-3) 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.featured-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  color: var(--accent);
+  font-size: var(--label-size);
+  font-weight: 600;
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+}
+
+.featured-flag svg { width: 11px; height: 11px; }
+
+.featured-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-3);
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.featured-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.featured-meta .card-meta { margin-top: 0; padding-top: 0; }
+
 /* ---------- Sections ---------- */
 
 .section { padding: 0 0 var(--space-6); }
@@ -359,6 +472,24 @@ a { color: inherit; text-decoration: none; }
   color: var(--ink);
   margin: 0;
 }
+
+/* Right-aligned escape hatch out of a truncated section — e.g. the homepage
+   grid only shows the newest few, this points at the full archive. */
+.section-link {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--label-size);
+  font-weight: 600;
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  transition: color var(--dur-slow) var(--ease-slow);
+}
+
+.section-link:hover, .section-link:focus-visible { color: var(--accent); }
 
 /* ---------- Card grid ---------- */
 
@@ -923,6 +1054,75 @@ a { color: inherit; text-decoration: none; }
   margin: var(--space-3) 0 var(--space-2);
 }
 
+.page-lede {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: var(--step-1);
+}
+
+/* ---------- Pagination (archive) ---------- */
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+
+.pager-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: var(--label-size);
+  font-weight: 600;
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color var(--dur-slow) var(--ease-slow);
+}
+
+.pager-step:hover { color: var(--accent); }
+
+/* Kept in the layout rather than removed so the number row stays centred on
+   the first and last page. */
+.pager-step.is-off {
+  color: var(--muted);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.pager-nums {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.pager-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 6px;
+  border-radius: var(--radius-sm);
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  transition:
+    background var(--dur-slow) var(--ease-slow),
+    color var(--dur-slow) var(--ease-slow);
+}
+
+.pager-num:hover { background: var(--paper-sunk); color: var(--ink); }
+
+.pager-num.is-current {
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+}
+
 .disclosure {
   font-size: var(--step--1);
   color: var(--muted);
@@ -939,6 +1139,15 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
   color: var(--muted);
 }
+
+/* Shown only when a search filters every card out. */
+.no-results {
+  padding: var(--space-5) 0 0;
+  text-align: center;
+  color: var(--muted);
+}
+
+.no-results[hidden] { display: none; }
 
 .draft-flag {
   display: inline-block;
@@ -960,6 +1169,13 @@ a { color: inherit; text-decoration: none; }
   .grid { grid-template-columns: repeat(2, 1fr); }
   .cat-row { grid-template-columns: repeat(2, 1fr); }
   .cat-row .cat-pill:nth-child(2n) { border-right: none; }
+
+  /* Stack the hero split — copy first, then the featured roundup. */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+  .hero p { max-width: none; }
 }
 
 @media (max-width: 720px) {
@@ -980,7 +1196,14 @@ a { color: inherit; text-decoration: none; }
   }
   .nav-toggle { display: block; }
 
-  .hero { padding: var(--space-6) 0 var(--space-5); }
+  /* Tighten the stacked hero so the featured roundup still clears the fold
+     on a short phone (~667px tall), not just a tall one. */
+  .hero { padding: var(--space-4) 0 var(--space-5); }
+  .hero-grid { gap: var(--space-4); }
+  .hero h1 { margin-bottom: var(--space-2); }
+  .hero p { margin-bottom: var(--space-3); }
+  .hero-cats { margin-top: var(--space-3); }
+  .featured-title { font-size: var(--step-2); }
 
   .grid { grid-template-columns: 1fr; }
 

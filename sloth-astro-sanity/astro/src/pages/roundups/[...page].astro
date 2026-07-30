@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PawIcon from '../../components/PawIcon.astro'
+import RoundupCard from '../../components/RoundupCard.astro'
+import {getRoundups} from '../../lib/roundups.js'
+
+// The full archive, newest first. The homepage only surfaces the newest
+// handful, so this is the one place every roundup stays reachable — split
+// into static pages rather than a carousel or a JS "load more" so each
+// article is a crawlable link on a real URL.
+export async function getStaticPaths({paginate}) {
+  const roundups = await getRoundups()
+  return paginate(roundups, {pageSize: 12})
+}
+
+const {page} = Astro.props
+
+// Page 1 lives at /roundups/, not /roundups/1/. Prev/next are derived from
+// the page number rather than page.url.prev/next, which Astro emits without a
+// trailing slash — mixing the two forms would point at the same page by two
+// URLs, costing a redirect hop and muddying canonicals.
+const hrefFor = (n) => (n === 1 ? '/roundups/' : `/roundups/${n}/`)
+const pageNumbers = Array.from({length: page.lastPage}, (_, i) => i + 1)
+const prevHref = page.currentPage > 1 ? hrefFor(page.currentPage - 1) : null
+const nextHref = page.currentPage < page.lastPage ? hrefFor(page.currentPage + 1) : null
+
+const title =
+  page.currentPage === 1
+    ? 'All roundups — Shopping Sloth'
+    : `All roundups (page ${page.currentPage}) — Shopping Sloth`
+const description =
+  'Every Shopping Sloth roundup, newest first — checked against real reviews and testing data, never rushed.'
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="wrap">
+    <div class="page-head">
+      <div class="eyebrow">
+        <PawIcon size={12} />
+        the archive
+      </div>
+      <h1>all roundups</h1>
+      <p class="page-lede">
+        {page.total} {page.total === 1 ? 'roundup' : 'roundups'}, newest first.
+        {page.lastPage > 1 && ` Page ${page.currentPage} of ${page.lastPage}.`}
+      </p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      {
+        page.data.length ? (
+          <div class="grid">
+            {page.data.map((roundup) => (
+              <RoundupCard roundup={roundup} />
+            ))}
+          </div>
+        ) : (
+          <div class="empty">Nothing here yet. We're taking our time.</div>
+        )
+      }
+
+      {
+        page.lastPage > 1 && (
+          <nav class="pager" aria-label="Pagination">
+            {prevHref ? (
+              <a class="pager-step" href={prevHref} rel="prev">
+                <span aria-hidden="true">←</span> newer
+              </a>
+            ) : (
+              <span class="pager-step is-off">
+                <span aria-hidden="true">←</span> newer
+              </span>
+            )}
+
+            <div class="pager-nums">
+              {pageNumbers.map((n) =>
+                n === page.currentPage ? (
+                  <span class="pager-num is-current" aria-current="page">
+                    {n}
+                  </span>
+                ) : (
+                  <a class="pager-num" href={hrefFor(n)}>
+                    {n}
+                  </a>
+                ),
+              )}
+            </div>
+
+            {nextHref ? (
+              <a class="pager-step" href={nextHref} rel="next">
+                older <span aria-hidden="true">→</span>
+              </a>
+            ) : (
+              <span class="pager-step is-off">
+                older <span aria-hidden="true">→</span>
+              </span>
+            )}
+          </nav>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
