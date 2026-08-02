@@ -1,10 +1,12 @@
 name: Draft next roundup
 
-# Tuesdays and Fridays, matching the cadence in content-schedule.csv.
-# 13:00 UTC ≈ early morning US, so a human has the day to review the draft.
+# Disabled 2026-08-01: content-schedule.csv is gitignored (local-only editorial
+# calendar), so this job's own CSV read always fails with ENOENT once it runs
+# in a fresh checkout — the schedule trigger below never worked. Manual
+# drafting is the active workflow instead. Re-enable the schedule (and add the
+# missing ANTHROPIC_API_KEY / SANITY_WRITE_TOKEN repo secrets) only after this
+# script no longer depends on the gitignored CSV.
 on:
-  schedule:
-    - cron: '0 13 * * 2,5'
   workflow_dispatch:
     inputs:
       slug:
