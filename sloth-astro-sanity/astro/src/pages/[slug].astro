@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PawIcon from '../components/PawIcon.astro'
 import ProductImage from '../components/ProductImage.astro'
+import RoundupCard from '../components/RoundupCard.astro'
 import {getRoundups, introToHtml, introToPlainText, formatMonth, withAffiliateTag} from '../lib/roundups.js'
 
 // ONE template for every roundup. New Sanity documents become new pages
@@ -9,10 +10,19 @@ import {getRoundups, introToHtml, introToPlainText, formatMonth, withAffiliateTa
 // pattern has broken — fix it here instead of adding a file.
 export async function getStaticPaths() {
   const roundups = await getRoundups()
-  return roundups.map((roundup) => ({params: {slug: roundup.slug}, props: {roundup}}))
+  return roundups.map((roundup) => {
+    // Same-category picks first (most relevant to a reader who just finished
+    // this one), padded out with the newest other roundups if the category
+    // doesn't have three others yet. Keeps every article page linking to a
+    // few more affiliate-bearing pages instead of dead-ending after one read.
+    const sameCategory = roundups.filter((r) => r.slug !== roundup.slug && r.category === roundup.category)
+    const others = roundups.filter((r) => r.slug !== roundup.slug && r.category !== roundup.category)
+    const related = [...sameCategory, ...others].slice(0, 3)
+    return {params: {slug: roundup.slug}, props: {roundup, related}}
+  })
 }
 
-const {roundup} = Astro.props
+const {roundup, related} = Astro.props
 const intro = introToHtml(roundup.intro)
 const description = introToPlainText(roundup.intro)
 const updated = formatMonth(roundup.updatedAt ?? roundup.publishedAt)
@@ -191,6 +201,19 @@ const breadcrumbJsonLd = {
       roundup.pullQuote && (
         <div class="quote" style="margin-bottom:56px;">
           <p>"{roundup.pullQuote}"</p>
+        </div>
+      )
+    }
+
+    {
+      related.length > 0 && (
+        <div class="related">
+          <h2>you might also like</h2>
+          <div class="grid">
+            {related.map((r) => (
+              <RoundupCard roundup={r} />
+            ))}
+          </div>
         </div>
       )
     }
