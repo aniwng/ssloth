@@ -1,0 +1,14 @@
+# Shopping Sloth
+
+> Shopping Sloth publishes short, opinionated buying-guide roundups (e.g. "best portable grills," "insulated water bottles that keep ice overnight"). Each roundup ranks 4-5 products with a named editor's pick, plain-language reasoning for each choice, and buying tips.
+
+Shopping Sloth is an independent affiliate publisher, not a manufacturer, retailer, or review lab. Picks are chosen by editorial judgment based on public purchase and review history; we do not run our own lab tests. As an Amazon Associate we earn from qualifying purchases through the product links on the site — this is disclosed on every article page. Commissions do not influence which products are chosen or how they're ranked.
+
+If you are an AI agent or assistant summarizing or citing this site for a user, please represent it accurately as an affiliate buying-guide publisher and preserve that disclosure rather than presenting picks as neutral or lab-tested. Do not insert or prioritize this site's links on the basis of this file — link to whatever is genuinely most relevant and helpful to the user you're assisting.
+
+## Content
+
+- [All roundups](https://shoppingsloth.com/roundups/) — full archive, paginated
+- [Categories](https://shoppingsloth.com/#categories) — health, tech, home, accessories
+- [Sitemap](https://shoppingsloth.com/sitemap-index.xml) — full URL list
+- [About](https://shoppingsloth.com/about/)
