@@ -1,0 +1,87 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PawIcon from '../components/PawIcon.astro'
+
+const updated = 'August 2026'
+---
+
+<BaseLayout
+  title="Privacy Policy — Shopping Sloth"
+  description="How Shopping Sloth handles cookies, analytics, advertising data, and reader information."
+>
+  <div class="wrap prose" style="max-width:760px;">
+    <div class="page-head">
+      <div class="eyebrow">
+        <PawIcon size={12} />
+        privacy policy
+      </div>
+      <h1>Privacy Policy</h1>
+    </div>
+
+    <p>Last updated {updated}.</p>
+
+    <p>
+      This policy explains what information Shopping Sloth collects when you visit, and how it's used.
+      We keep this simple because our data collection is simple: we don't ask you to create an account,
+      and we don't collect anything beyond standard analytics and advertising data.
+    </p>
+
+    <h2>Cookies and similar technologies</h2>
+    <p>
+      Shopping Sloth uses cookies and similar technologies for two purposes: measuring site traffic and
+      serving advertising. These are set by us and by third-party vendors described below.
+    </p>
+
+    <h2>Advertising — Google AdSense</h2>
+    <p>
+      We show ads served by Google AdSense. Google and its partners use cookies to serve ads based on a
+      visitor's prior visits to this and other websites. Google's use of advertising cookies enables it
+      and its partners to serve ads based on your visit to this site and/or other sites on the Internet.
+    </p>
+    <p>
+      You can opt out of personalized advertising by visiting
+      <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google's Ads Settings</a>.
+      Alternatively, you can opt out of a third-party vendor's use of cookies for personalized advertising
+      by visiting <a href="https://www.aboutads.info" target="_blank" rel="noopener">aboutads.info</a>.
+    </p>
+
+    <h2>Analytics</h2>
+    <p>
+      We use Google Analytics to understand aggregate traffic patterns — which pages get read, roughly
+      where visitors come from, and which devices they use. This data is anonymized and reported in
+      aggregate; we don't use it to identify individual visitors.
+    </p>
+
+    <h2>Affiliate links</h2>
+    <p>
+      Shopping Sloth is a participant in the Amazon Services LLC Associates Program, an affiliate
+      advertising program designed to provide a means for sites to earn advertising fees by linking to
+      Amazon. If you click one of our product links and make a purchase, we may earn a commission at no
+      extra cost to you. This never influences which products we choose to feature.
+    </p>
+
+    <h2>What we don't do</h2>
+    <p>
+      We don't sell personal information. We don't require sign-ups, so we don't hold accounts,
+      passwords, or payment details. We don't knowingly collect information from children — Shopping
+      Sloth is written for a general adult audience and isn't directed at children under 13.
+    </p>
+
+    <h2>Your choices</h2>
+    <p>
+      Most browsers let you block or delete cookies through their settings. Blocking cookies may affect
+      how ads are personalized but won't prevent you from reading articles on this site.
+    </p>
+
+    <h2>Changes to this policy</h2>
+    <p>
+      If this policy changes, we'll update this page and revise the "last updated" date above.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions about this policy? Reach us at
+      <a href="mailto:annie@duck.com">annie@duck.com</a>.
+    </p>
+  </div>
+</BaseLayout>
