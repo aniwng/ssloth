@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PawIcon from '../components/PawIcon.astro'
+import {AUTHOR} from '../lib/author.js'
 ---
 
 <BaseLayout
@@ -37,6 +38,11 @@ import PawIcon from '../components/PawIcon.astro'
     <p>
       Every pick is checked against reviews and testing data from sources that actually put products
       through the wringer. We take our time before telling you what's worth buying.
+    </p>
+
+    <h2 id="editor">Who writes this</h2>
+    <p>
+      <strong>{AUTHOR.name}</strong>, {AUTHOR.title.toLowerCase()}. {AUTHOR.bio}
     </p>
 
     <h2>A note on affiliate links</h2>

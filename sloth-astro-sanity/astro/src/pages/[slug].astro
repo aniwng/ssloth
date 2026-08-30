@@ -4,6 +4,7 @@ import PawIcon from '../components/PawIcon.astro'
 import ProductImage from '../components/ProductImage.astro'
 import RoundupCard from '../components/RoundupCard.astro'
 import {getRoundups, introToHtml, introToPlainText, formatMonth, withAffiliateTag} from '../lib/roundups.js'
+import {AUTHOR} from '../lib/author.js'
 
 // ONE template for every roundup. New Sanity documents become new pages
 // automatically. If you ever find yourself creating article-2.astro, the
@@ -44,7 +45,7 @@ const articleJsonLd = {
   image: absoluteImage,
   datePublished: publishedISO,
   dateModified: modifiedISO,
-  author: {'@type': 'Organization', name: 'Shopping Sloth'},
+  author: {'@type': 'Person', name: AUTHOR.name, url: new URL('/about/', Astro.site).toString()},
   publisher: {'@type': 'Organization', name: 'Shopping Sloth'},
   mainEntityOfPage: canonicalUrl,
 }
@@ -96,7 +97,10 @@ const breadcrumbJsonLd = {
     <div class="article-head">
       <span class={`tag ${roundup.category}`}>{roundup.category}</span>
       <h1>{roundup.title}</h1>
-      <div class="article-meta">{meta}</div>
+      <div class="article-meta">
+        by <a href="/about/#editor">{AUTHOR.name}</a>
+        {meta && ` · ${meta}`}
+      </div>
     </div>
 
     <div class={roundup.heroImage ? 'article-hero' : 'article-hero ph'}>
