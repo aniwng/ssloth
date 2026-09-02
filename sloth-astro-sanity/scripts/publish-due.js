@@ -6,12 +6,19 @@
  * (and beyond) queued drafts go live on their planned dates without a human
  * clicking "Publish" in Studio.
  *
+ * Pre-publish step: each due draft's affiliate links get checked (see
+ * lib/affiliateLinks.js) before it's promoted. A draft with a confirmed
+ * dead link is skipped — left as a draft for a human to fix — rather than
+ * letting a 404'd Amazon link go live unattended; every other due draft
+ * still publishes normally.
+ *
  *   PUBLIC_SANITY_PROJECT_ID=... SANITY_WRITE_TOKEN=... node publish-due.js
  *   node publish-due.js --dry-run   # print what would be published, write nothing
  */
 import {createClient} from '@sanity/client'
 import 'dotenv/config'
 import {appendFileSync} from 'node:fs'
+import {checkRoundup, formatReport, hasBroken} from './lib/affiliateLinks.js'
 
 const dryRun = process.argv.includes('--dry-run')
 
@@ -40,6 +47,7 @@ async function main() {
   }
 
   const publishedSlugs = []
+  const skippedSlugs = []
 
   for (const draft of due) {
     const slug = draft.slug?.current
@@ -47,6 +55,15 @@ async function main() {
 
     console.log(`\n${draft.title}`)
     console.log(`  ${draft._id} -> ${publishedId}  (was due ${draft.publishedAt})`)
+
+    const linkReport = await checkRoundup(draft)
+    console.log(formatReport(linkReport))
+
+    if (hasBroken(linkReport)) {
+      console.log(`  SKIPPED — broken affiliate link(s), left as draft for review.`)
+      skippedSlugs.push(slug)
+      continue
+    }
 
     if (dryRun) continue
 
@@ -62,9 +79,13 @@ async function main() {
     return
   }
 
-  console.log(`\nPublished ${publishedSlugs.length} roundup(s): ${publishedSlugs.join(', ')}`)
-  setOutput('published', 'true')
+  console.log(`\nPublished ${publishedSlugs.length} roundup(s): ${publishedSlugs.join(', ') || 'none'}`)
+  if (skippedSlugs.length) {
+    console.log(`Skipped ${skippedSlugs.length} due to broken links: ${skippedSlugs.join(', ')}`)
+  }
+  setOutput('published', publishedSlugs.length > 0 ? 'true' : 'false')
   setOutput('slugs', publishedSlugs.join(', '))
+  setOutput('skipped', skippedSlugs.join(', '))
 }
 
 /** No-op outside GitHub Actions (GITHUB_OUTPUT unset). */

@@ -5,6 +5,12 @@ name: Publish scheduled roundups
 # Studio), then kicks off a site deploy so it actually goes live. Runs daily,
 # a few minutes after the 09:00 UTC publishedAt time used by the content
 # calendar.
+#
+# Pre-publish step: publish-due.js checks every product's affiliate link
+# (scripts/lib/affiliateLinks.js) before promoting a draft, and skips
+# (leaves as a draft) any roundup with a confirmed-dead Amazon link rather
+# than publishing a 404. Check the job log for "SKIPPED" if a roundup you
+# expected to go out today didn't.
 on:
   schedule:
     - cron: '5 9 * * *'
