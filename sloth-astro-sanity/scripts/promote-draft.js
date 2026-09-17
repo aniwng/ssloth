@@ -6,13 +6,20 @@
  * Sanity (not from a local JSON file), writes it under the published id,
  * then deletes the draft.
  *
+ * Before writing anything, checks every product's affiliateUrl (see
+ * lib/affiliateLinks.js) and refuses to publish if one is confirmed dead —
+ * a 404'd or delisted ASIN going live is worse than a late roundup.
+ *
  *   PUBLIC_SANITY_PROJECT_ID=... SANITY_WRITE_TOKEN=... node promote-draft.js <slug>
  *   node promote-draft.js <slug> --dry-run   # print what would happen, write nothing
+ *   node promote-draft.js <slug> --force     # publish anyway despite a broken link
  */
 import {createClient} from '@sanity/client'
 import 'dotenv/config'
+import {checkRoundup, formatReport, hasBroken} from './lib/affiliateLinks.js'
 
 const dryRun = process.argv.includes('--dry-run')
+const force = process.argv.includes('--force')
 const slug = process.argv[2]
 
 async function main() {
@@ -41,6 +48,14 @@ async function main() {
 
   console.log(`\n${draft.title}`)
   console.log(`  ${draftId} -> ${publishedId}`)
+
+  console.log('\nChecking affiliate links...')
+  const linkReport = await checkRoundup(draft)
+  console.log(formatReport(linkReport))
+
+  if (hasBroken(linkReport) && !force) {
+    throw new Error('One or more affiliate links are broken — fix them in Studio, or rerun with --force to publish anyway.')
+  }
 
   if (dryRun) {
     console.log('\nDry run complete — nothing written.')

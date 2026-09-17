@@ -1,0 +1,52 @@
+name: Publish scheduled roundups
+
+# Promotes any draft roundup whose publishedAt has arrived to published in
+# Sanity (scripts/publish-due.js — same effect as clicking "Publish" in
+# Studio), then kicks off a site deploy so it actually goes live. Runs daily,
+# a few minutes after the 09:00 UTC publishedAt time used by the content
+# calendar.
+#
+# Pre-publish step: publish-due.js checks every product's affiliate link
+# (scripts/lib/affiliateLinks.js) before promoting a draft, and skips
+# (leaves as a draft) any roundup with a confirmed-dead Amazon link rather
+# than publishing a 404. Check the job log for "SKIPPED" if a roundup you
+# expected to go out today didn't.
+on:
+  schedule:
+    - cron: '5 9 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write # to trigger the deploy workflow after publishing
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    outputs:
+      published: ${{ steps.publish.outputs.published }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install
+        working-directory: sloth-astro-sanity/scripts
+        run: npm ci
+
+      - name: Publish due roundups
+        id: publish
+        working-directory: sloth-astro-sanity/scripts
+        env:
+          PUBLIC_SANITY_PROJECT_ID: ${{ secrets.PUBLIC_SANITY_PROJECT_ID }}
+          PUBLIC_SANITY_DATASET: production
+          SANITY_WRITE_TOKEN: ${{ secrets.SANITY_WRITE_TOKEN }}
+        run: node publish-due.js
+
+      - name: Trigger deploy
+        if: steps.publish.outputs.published == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy.yml --repo ${{ github.repository }}
