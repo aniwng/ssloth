@@ -71,6 +71,60 @@ npm run dev
 Once `PUBLIC_SANITY_PROJECT_ID` is set, the Astro site reads from Sanity and
 never touches the seed file again.
 
+## Editorial honesty (read before changing site copy)
+
+Google AdSense flagged this site for **low value content**. The fixes made in
+response are not cosmetic, and undoing them re-opens the problem:
+
+- **No fabricated humans.** The site used to publish under "Jordan Ellison,
+  Founding Editor" — an invented person whose bio claimed access to testing
+  writeups and return-rate data that never existed. Articles now publish under
+  the Shopping Sloth editorial team (`astro/src/lib/author.js`), and the
+  schema.org author is an `Organization`, not a `Person`. If a real named person
+  ever takes editorial ownership, use their real name. Not before.
+- **No claims we can't back.** The site says it doesn't test products and works
+  from published reviews. `/how-we-pick/` states that plainly, including that
+  drafts are AI-assisted and human-reviewed, and each article now publishes the
+  sources it was built from. Don't reintroduce copy implying a lab or
+  first-hand testing.
+- **Affiliate disclosure goes above the first affiliate link**, not only in the
+  article footer.
+- **`/how-we-pick/` is the contract.** If the process changes, change that page
+  first.
+
+## Making an article worth the page
+
+Beyond the picks themselves, the `roundup` schema carries the fields that
+separate a useful guide from a restatement of the retailer's own listing:
+
+| Field | Why it matters |
+| --- | --- |
+| `sources[]` | The published reviews the roundup was built from, rendered as "what we read" and as schema.org `citation`. This is the evidence for the site's central claim. |
+| `products[].skipIf` | A real reason to pass on each pick. A roundup where nothing has a downside isn't a roundup. |
+| `products[].bestFor` | Who each pick actually suits, so five picks sort readers five ways. |
+| `products[].keySpecs` | The two or three figures a buyer compares. Confirmable facts only, never prices. |
+| `faqs[]` | Questions the article body doesn't answer. Also emits `FAQPage` markup. |
+
+The generator collected `sources` from the very first version and then silently
+dropped them before writing to Sanity — every roundup was researched against
+real sources readers never saw. That's fixed in `scripts/lib/roundupSchema.js`.
+
+### Backfilling articles published before those fields existed
+
+```bash
+cd sloth-astro-sanity/scripts
+npm run enrich:dry                 # research and print, write nothing
+npm run enrich                     # patch drafts for human review
+npm run enrich:live                # patch the live documents in place
+node enrich-roundups.js --slug best-e-readers-in-2026 --write
+```
+
+It's additive by design: picks, ranks, blurbs, intros, and titles are never
+touched, and the patched product list is rebuilt from the *existing* documents
+so a hallucinated product name can't overwrite a real one. Validation rejects a
+pass with fewer than three sources, a missing or duplicated `skipIf`, or a price
+smuggled into `keySpecs`.
+
 ## Generate a roundup
 
 ```bash

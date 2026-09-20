@@ -12,8 +12,55 @@ export async function getStaticPaths() {
   }))
 }
 
+// Each category page used to be a heading and a grid of cards — barely a
+// hundred words of its own, four near-identical pages differing only by the
+// word in the <h1>, and all four indexed. A listing page still has to be worth
+// landing on, so each one now says what the category covers here and what we
+// actually weigh when picking in it.
+const BLURBS = {
+  health: {
+    lede: 'Sunscreen, skincare, recovery gear, and the things that make a body feel less like a rental car.',
+    body:
+      'Health and personal-care picks get the most conservative treatment on the site. For anything ' +
+      'that goes on skin or claims an effect on the body, we stick to what mainstream dermatological ' +
+      'and medical guidance supports, we avoid products whose main selling point is a mechanism nobody ' +
+      'has demonstrated, and we say when something is a comfort purchase rather than a clinical one. ' +
+      'Nothing here is medical advice, and a product that needs a professional opinion gets one from ' +
+      'your doctor, not from us.',
+  },
+  tech: {
+    lede: 'Headphones, keyboards, e-readers, monitors — the gear that lives on a desk or in a bag.',
+    body:
+      'Tech is the category where independent measurement actually exists, so it carries the most ' +
+      'weight here: outlets like Rtings and CNET publish lab numbers for things like battery life, ' +
+      'latency, and noise reduction, and those get priority over impressions. We also weight how long ' +
+      'a product stays supported, since a device that loses firmware updates in eighteen months is a ' +
+      'worse buy than its spec sheet suggests.',
+  },
+  home: {
+    lede: 'Air purifiers, coffee makers, robot vacuums, fans — the appliances you notice only when they stop working.',
+    body:
+      'Home appliances are the category where the purchase price is the least interesting number. We ' +
+      'look hardest at what a thing costs to keep running — filters, pods, descaling, replacement ' +
+      'brushes — and at whether it is still serviceable in three years. A cheap purifier with an ' +
+      'expensive proprietary filter is not a cheap purifier. Noise matters more than most spec sheets ' +
+      'admit, so we favour picks where somebody has actually measured it.',
+  },
+  accessories: {
+    lede: 'Backpacks, bottles, sunglasses, camping chairs — the things that get carried, dropped, and packed badly.',
+    body:
+      'Accessories live or die on construction, so this is where published long-term testing and ' +
+      'sustained review history matter most. We weight the parts that fail first — zippers, stitching, ' +
+      'hinges, lids, strap anchors — and we prefer brands that will sell you a replacement part instead ' +
+      'of a replacement product. A warranty that is easy to actually claim counts for more here than ' +
+      'in any other category.',
+  },
+}
+
 const {category, roundups} = Astro.props
-const description = `Slow, deliberate ${category} product roundups from Shopping Sloth — checked against real reviews and testing data, never rushed.`
+const blurb = BLURBS[category]
+const count = roundups.length
+const description = `${blurb.lede} ${count} Shopping Sloth ${category} roundup${count === 1 ? '' : 's'}, built from published reviews and testing with sources cited on every article.`
 ---
 
 <BaseLayout title={`${category} roundups — Shopping Sloth`} description={description}>
@@ -29,6 +76,15 @@ const description = `Slow, deliberate ${category} product roundups from Shopping
 
   <section class="section">
     <div class="wrap">
+      <div class="category-intro prose">
+        <p class="lede">{blurb.lede}</p>
+        <p>{blurb.body}</p>
+        <p>
+          {count} roundup{count === 1 ? '' : 's'} here so far. Every one lists the reviews and testing it
+          was built from — we don't test products ourselves. <a href="/how-we-pick/">How we pick</a>.
+        </p>
+      </div>
+
       {
         roundups.length ? (
           <div class="grid">

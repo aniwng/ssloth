@@ -6,7 +6,10 @@
   "scripts": {
     "generate": "node generate-and-publish.js",
     "generate:dry": "node generate-and-publish.js --dry-run",
-    "queue": "node generate-and-publish.js --list"
+    "queue": "node generate-and-publish.js --list",
+    "enrich:dry": "node enrich-roundups.js",
+    "enrich": "node enrich-roundups.js --write",
+    "enrich:live": "node enrich-roundups.js --write --publish"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.68.0",

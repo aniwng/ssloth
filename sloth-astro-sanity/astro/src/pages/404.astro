@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PawIcon from '../components/PawIcon.astro'
+import RoundupCard from '../components/RoundupCard.astro'
+import {getRoundups} from '../lib/roundups.js'
+
+// There was no 404 page, so a mistyped or retired URL fell through to the
+// host's default — a bare "not found" with no header, no navigation, and no
+// way back into the site. A dead end like that is a bad experience for a
+// reader and reads as an unfinished site to anyone reviewing it.
+const recent = (await getRoundups()).slice(0, 3)
+---
+
+<BaseLayout
+  title="Page not found — Shopping Sloth"
+  description="That page doesn't exist. Here's the way back."
+  robots="noindex, follow"
+>
+  <div class="wrap prose" style="max-width:760px;">
+    <div class="page-head">
+      <div class="eyebrow">
+        <PawIcon size={12} />
+        404
+      </div>
+      <h1>Nothing here.</h1>
+    </div>
+
+    <p>
+      That page doesn't exist — either the link was wrong, or we moved something and didn't leave a
+      note. Sloth problems.
+    </p>
+    <p>
+      Try <a href="/roundups/">the full archive</a>, pick a category from
+      <a href="/#categories">the homepage</a>, or tell us about the broken link at
+      <a href="mailto:hello@shoppingsloth.com">hello@shoppingsloth.com</a>.
+    </p>
+  </div>
+
+  {
+    recent.length > 0 && (
+      <section class="section">
+        <div class="wrap">
+          <div class="related">
+            <h2>recent roundups</h2>
+            <div class="grid">
+              {recent.map((roundup) => (
+                <RoundupCard roundup={roundup} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>

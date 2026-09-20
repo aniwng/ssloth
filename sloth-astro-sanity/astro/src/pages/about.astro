@@ -1,12 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PawIcon from '../components/PawIcon.astro'
-import {AUTHOR} from '../lib/author.js'
+
+// Kept deliberately short. The substance — process, AI disclosure, what we
+// don't do, how the money works — lives on /how-we-pick/ so there's exactly
+// one page to keep honest, rather than two that drift apart. This page is the
+// personality; that page is the contract.
 ---
 
 <BaseLayout
   title="About — Shopping Sloth"
-  description="Slow, thorough product roundups checked against real reviews and testing data."
+  description="Who runs Shopping Sloth, what we publish, and why we're upfront about being an affiliate site that doesn't test products."
 >
   <div class="wrap prose" style="max-width:760px;">
     <div class="page-head">
@@ -27,28 +31,39 @@ import {AUTHOR} from '../lib/author.js'
       editorial philosophy.
     </p>
 
-    <h2>Why a sloth?</h2>
+    <h2>What this site is</h2>
     <p>
-      We got tired of "top 10" lists clearly written in twenty minutes by someone who never read past
-      the first review. So we decided to be the opposite: slow, thorough, and mildly suspicious of
-      anything claiming to be "revolutionary."
-    </p>
-
-    <h2>What we actually do</h2>
-    <p>
-      Every pick is checked against reviews and testing data from sources that actually put products
-      through the wringer. We take our time before telling you what's worth buying.
+      Shopping Sloth is a small independent affiliate site publishing buying-guide roundups — "best
+      X" lists, five picks at a time, in categories like home, tech, health, and accessories. We started
+      it because most roundups in this genre read like nobody involved got past the first review, and we
+      thought a slower one would be more useful.
     </p>
 
     <h2 id="editor">Who writes this</h2>
     <p>
-      <strong>{AUTHOR.name}</strong>, {AUTHOR.title.toLowerCase()}. {AUTHOR.bio}
+      Articles are published under the Shopping Sloth editorial team rather than a personal byline,
+      because that's accurate: roundups are drafted with AI research grounded in published reviews, then
+      checked and edited by a person before anything goes live. We'd rather tell you that than invent a
+      masthead.
+    </p>
+    <p>
+      We are not a testing lab, a retailer, or a manufacturer. We don't handle the products we write
+      about — we read the people who do, and we cite them on each article.
+      <a href="/how-we-pick/">Here's the full process, in detail.</a>
     </p>
 
-    <h2>A note on affiliate links</h2>
+    <h2>How we make money</h2>
     <p>
-      Some of our links are affiliate links, and we may earn a small commission if you buy through them,
-      at no extra cost to you. Commissions never influence our picks.
+      Some links are affiliate links, and as an Amazon Associate we earn from qualifying purchases made
+      through them, at no extra cost to you. We also run display ads. No brand pays to be featured or
+      ranked here. <a href="/how-we-pick/#how-we-make-money">More on that.</a>
+    </p>
+
+    <h2>Tell us when we're wrong</h2>
+    <p>
+      Discontinued pick, dead link, a claim that doesn't hold up? Email
+      <a href="mailto:hello@shoppingsloth.com">hello@shoppingsloth.com</a>. We fix things and date the
+      fix. See also our <a href="/contact/">contact page</a>.
     </p>
 
     <div class="quote" style="margin:56px 0;">

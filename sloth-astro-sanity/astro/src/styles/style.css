@@ -865,12 +865,13 @@ a { color: inherit; text-decoration: none; }
 
 .entry {
   display: grid;
-  /* TEMPORARY: 3 columns instead of 4 — the per-product photo column
-     (.entry-thumb) is hidden until real product photos are sourced (stock
-     photography isn't honest here, since it'd have to depict this exact
-     named product — see CLAUDE.md task 5). When real photos land, restore
-     `auto 84px minmax(0, 1fr) auto` here, the mobile override below, and
-     .entry-copy's grid-column start — and remove entry-thumb's display:none. */
+  /* 3 columns by default — the per-product photo column (.entry-thumb) is
+     dropped when no product in this roundup has a real image, since an empty
+     placeholder tile per product reads as an unfinished page rather than a
+     considered one. [slug].astro adds .has-thumbs to .rankings as soon as any
+     product carries an image, which restores the 4-column layout below.
+     Stock photography is still not an option here: a product thumbnail has to
+     depict that exact named product. */
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   column-gap: var(--space-4);
@@ -928,10 +929,19 @@ a { color: inherit; text-decoration: none; }
   height: 84px;
   border-radius: var(--radius-md);
   flex-shrink: 0;
-  /* TEMPORARY: hidden until real product photos exist — see the comment
-     on .entry above. */
+  /* Hidden unless this roundup actually has product photos — see .has-thumbs
+     below and the comment on .entry above. */
   display: none;
 }
+
+/* Restored 4-column layout, applied by [slug].astro once any product in the
+   roundup has a real image. A product without one still gets the paw-mark
+   placeholder so the rows stay aligned. */
+.rankings.has-thumbs .entry { grid-template-columns: auto 84px minmax(0, 1fr) auto; }
+.rankings.has-thumbs.no-rank .entry { grid-template-columns: 84px minmax(0, 1fr) auto; }
+.rankings.has-thumbs .entry-thumb { display: flex; }
+.rankings.has-thumbs .entry-copy { grid-column: 3 / -1; }
+.rankings.has-thumbs.no-rank .entry-copy { grid-column: 1 / -1; }
 
 .entry-thumb svg { width: 22px; height: 22px; }
 
@@ -951,8 +961,12 @@ a { color: inherit; text-decoration: none; }
   margin-top: 3px;
 }
 
+/* .entry-copy is a wrapper now, not the paragraph itself — the blurb sits
+   inside it alongside the optional specs and get-it-if/skip-it-if blocks. */
+.entry-copy > p:first-child { margin: 0; }
+
 .entry-copy {
-  grid-column: 2 / -1; /* TEMPORARY: was 3 / -1 — see .entry's comment */
+  grid-column: 2 / -1; /* 3 / -1 under .has-thumbs — see .entry's comment */
   font-size: var(--step-0);
   color: var(--ink-soft);
   max-width: var(--measure);
@@ -1110,6 +1124,134 @@ a { color: inherit; text-decoration: none; }
 }
 
 .prose a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent); }
+
+.prose ul { color: var(--ink-soft); font-size: var(--step-1); max-width: var(--measure); padding-left: 1.1em; }
+.prose li { margin-bottom: var(--space-3); }
+.prose li strong { color: var(--ink); }
+
+/* Opening line on the standards page — sets the honest framing before the
+   detail, so the answer is visible without reading the whole page. */
+.lede {
+  font-size: var(--step-2);
+  color: var(--ink);
+  max-width: var(--measure);
+  border-left: 3px solid var(--accent);
+  padding-left: var(--space-4);
+}
+
+/* ---------- Article trust blocks ---------- */
+
+/* The affiliate disclosure, shown ABOVE the first affiliate link rather than
+   only in the footer of the article. Both the FTC's endorsement guidance and
+   ad-network review expect the disclosure before the link it applies to, not
+   after the reader has already clicked. */
+.disclosure-top {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  background: var(--wash, rgba(0, 0, 0, 0.03));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  margin: var(--space-5) 0;
+  max-width: var(--measure);
+}
+
+.disclosure-top a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+
+/* Per-article source citations. The generator already researches these; they
+   were being collected, validated, and then thrown away. */
+.sources {
+  margin: var(--space-6) 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+
+.sources h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-1);
+  color: var(--ink);
+  margin: 0 0 var(--space-2);
+}
+
+.sources p { font-size: var(--step--1); color: var(--muted); margin: 0 0 var(--space-3); max-width: var(--measure); }
+
+.sources ol { margin: 0; padding-left: 1.3em; color: var(--ink-soft); font-size: var(--step--1); }
+.sources li { margin-bottom: var(--space-2); }
+.sources a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; }
+.sources a:hover { color: var(--accent); }
+
+/* Per-product detail under the blurb. Optional on the document — a roundup
+   without these fields renders as it always did. */
+.entry-specs {
+  font-size: var(--step--1);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  margin: var(--space-2) 0 0;
+}
+
+.entry-fit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin: var(--space-3) 0 0;
+  font-size: var(--step--1);
+}
+
+.entry-fit div { max-width: 32ch; }
+
+.entry-fit dt {
+  font-size: var(--label-size);
+  letter-spacing: var(--label-track);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+
+.entry-fit dd { margin: 0; color: var(--ink-soft); }
+
+/* ---------- FAQ ---------- */
+
+.faq { margin: var(--space-6) 0; }
+
+.faq h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-2);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 var(--space-3);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+  padding: var(--space-3) 0;
+  max-width: var(--measure);
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-size: var(--step-0);
+  color: var(--ink);
+  font-weight: 500;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; color: var(--accent); flex-shrink: 0; }
+.faq-item[open] summary::after { content: '–'; }
+.faq-item p { font-size: var(--step--1); color: var(--ink-soft); margin: var(--space-2) 0 0; }
+
+/* Category listing pages carry real copy now rather than just a heading and a
+   grid — see src/pages/category/[category].astro. */
+.category-intro { margin-bottom: var(--space-6); }
+.category-intro .lede { margin-top: 0; }
 
 .page-head { padding: var(--space-6) 0 var(--space-3); }
 

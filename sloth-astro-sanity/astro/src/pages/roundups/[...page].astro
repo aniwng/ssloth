@@ -29,10 +29,20 @@ const title =
     ? 'All roundups — Shopping Sloth'
     : `All roundups (page ${page.currentPage}) — Shopping Sloth`
 const description =
-  'Every Shopping Sloth roundup, newest first — checked against real reviews and testing data, never rushed.'
+  page.currentPage === 1
+    ? 'Every Shopping Sloth roundup, newest first — built from published reviews and testing, with the sources cited on each article.'
+    : `Shopping Sloth roundups, page ${page.currentPage} of ${page.lastPage}.`
+
+// Pages 2+ of the archive are navigation, not reading: a dozen card links and
+// barely any prose of their own. Indexing them adds thin pages to the site's
+// footprint without adding anything a reader would search for. 'follow' keeps
+// the articles behind them discoverable, and they stay in the sitemap for
+// crawling — they just don't compete as landing pages. Page 1 indexes
+// normally.
+const robots = page.currentPage === 1 ? undefined : 'noindex, follow'
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} robots={robots}>
   <div class="wrap">
     <div class="page-head">
       <div class="eyebrow">
