@@ -3,10 +3,16 @@ import '../styles/style.css'
 
 const {
   title,
-  description = "Every pick here is checked against real reviews and testing data, so you don't have to hurry into a bad purchase.",
+  description = 'Buying-guide roundups built from published reviews and testing, with the sources cited on every article.',
   image,
   type = 'website',
   jsonLd,
+  // Set to 'noindex, follow' for pages that exist for navigation rather than
+  // for reading — paginated archive pages past the first, mainly. They carry
+  // almost no text of their own, and a crawl full of near-empty list pages
+  // drags down how the site reads in aggregate. 'follow' still lets the
+  // articles behind them be discovered.
+  robots,
 } = Astro.props
 
 const path = Astro.url.pathname
@@ -22,7 +28,16 @@ const siteJsonLd = {
   '@type': 'WebSite',
   name: 'Shopping Sloth',
   url: Astro.site?.toString(),
-  description: "Every pick here is checked against real reviews and testing data, so you don't have to hurry into a bad purchase.",
+  description:
+    'Buying-guide roundups built from published reviews and testing, with the sources cited on every article.',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Shopping Sloth',
+    url: Astro.site?.toString(),
+    // Declares the site's editorial policy where crawlers look for it. The
+    // page it points at is also what a human reviewer opens first.
+    publishingPrinciples: new URL('/how-we-pick/', Astro.site).toString(),
+  },
 }
 ---
 
@@ -33,6 +48,7 @@ const siteJsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {robots && <meta name="robots" content={robots} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalUrl} />
 
@@ -110,6 +126,7 @@ const siteJsonLd = {
             <a href="/">home</a>
             <a href="/roundups/">all roundups</a>
             <a href="/#categories">categories</a>
+            <a href="/how-we-pick/">how we pick</a>
             <a href="/about/">about</a>
             <a href="/contact/">contact</a>
             <a href="/privacy/">privacy policy</a>

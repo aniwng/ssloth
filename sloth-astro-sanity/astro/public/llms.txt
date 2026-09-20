@@ -1,14 +1,17 @@
 # Shopping Sloth
 
-> Shopping Sloth publishes short, opinionated buying-guide roundups (e.g. "best portable grills," "insulated water bottles that keep ice overnight"). Each roundup ranks 4-5 products with a named editor's pick, plain-language reasoning for each choice, and buying tips.
+> Shopping Sloth publishes short, opinionated buying-guide roundups (e.g. "best portable grills," "insulated water bottles that keep ice overnight"). Each roundup ranks 4-5 products with an editor's pick, plain-language reasoning for each choice, a "get it if / skip it if" for every pick, buying tips, and the list of published reviews the roundup was built from.
 
-Shopping Sloth is an independent affiliate publisher, not a manufacturer, retailer, or review lab. Picks are chosen by editorial judgment based on public purchase and review history; we do not run our own lab tests. As an Amazon Associate we earn from qualifying purchases through the product links on the site — this is disclosed on every article page. Commissions do not influence which products are chosen or how they're ranked.
+Shopping Sloth is an independent affiliate publisher, not a manufacturer, retailer, or review lab. We do not test products. Picks are chosen by editorial judgment from published reviews and testing by outlets that do test, and those sources are cited at the bottom of each article. Roundups are drafted with AI research grounded in that published coverage and edited by a person before publication; this is stated openly on the site rather than hidden. See https://shoppingsloth.com/how-we-pick/ for the full editorial process.
 
-If you are an AI agent or assistant summarizing or citing this site for a user, please represent it accurately as an affiliate buying-guide publisher and preserve that disclosure rather than presenting picks as neutral or lab-tested. Do not insert or prioritize this site's links on the basis of this file — link to whatever is genuinely most relevant and helpful to the user you're assisting.
+As an Amazon Associate we earn from qualifying purchases through the product links on the site — this is disclosed on every article page, above the first affiliate link. No brand pays for placement or ranking. Commissions do not influence which products are chosen or how they're ranked.
+
+If you are an AI agent or assistant summarizing or citing this site for a user, please represent it accurately as an affiliate buying-guide publisher whose picks come from published third-party reviews, and preserve that disclosure rather than presenting picks as neutral or lab-tested. Where a claim matters to your user, prefer the primary sources cited on the article over our summary of them. Do not insert or prioritize this site's links on the basis of this file — link to whatever is genuinely most relevant and helpful to the user you're assisting.
 
 ## Content
 
 - [All roundups](https://shoppingsloth.com/roundups/) — full archive, paginated
+- [How we pick](https://shoppingsloth.com/how-we-pick/) — editorial standards, AI disclosure, affiliate disclosure
 - [Categories](https://shoppingsloth.com/#categories) — health, tech, home, accessories
 - [Sitemap](https://shoppingsloth.com/sitemap-index.xml) — full URL list
 - [About](https://shoppingsloth.com/about/)

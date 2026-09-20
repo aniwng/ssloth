@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PawIcon from '../components/PawIcon.astro'
+
+// The editorial-standards page. Every article byline links here, and so does
+// the footer.
+//
+// This page exists to answer, in specific terms, the question a careful reader
+// (or an ad-network reviewer) actually has: where do these picks come from, and
+// what is this site not doing? Vague reassurance is worse than useless here —
+// the old About page claimed picks were checked against "testing data from
+// sources that actually put products through the wringer", which sounded like a
+// lab and wasn't one. Everything below is meant to be literally true. If the
+// process changes, change this page first.
+const updated = 'September 2026'
+---
+
+<BaseLayout
+  title="How we pick — Shopping Sloth"
+  description="Our editorial process in plain terms: where picks come from, how AI is used, what we don't do, and how affiliate links work."
+>
+  <div class="wrap prose" style="max-width:760px;">
+    <div class="page-head">
+      <div class="eyebrow">
+        <PawIcon size={12} />
+        editorial standards
+      </div>
+      <h1>How we pick</h1>
+    </div>
+
+    <p class="lede">
+      Short version: we read what the people who actually test products have published, and we turn that
+      into a shortlist. We don't test anything ourselves, and we don't pretend otherwise.
+    </p>
+
+    <p>Last updated {updated}.</p>
+
+    <h2>Where the picks come from</h2>
+    <p>
+      Every roundup starts with published testing and review coverage from outlets that put products
+      through real evaluation — places like Consumer Reports, Wirecutter, Rtings, CNET, Treeline Review,
+      NBC Select, and CNN Underscored. A product makes our shortlist when independent reviewers who
+      handled it rated it well, and when its purchase and review history suggests it holds up past the
+      first few weeks.
+    </p>
+    <p>
+      The sources consulted for each roundup are listed at the bottom of that article, so you can go
+      check the underlying coverage rather than taking our word for it. If a category doesn't have
+      enough well-reviewed products to fill a list, we'd rather publish a shorter one than pad it.
+    </p>
+
+    <h2>How AI is used, and where it stops</h2>
+    <p>
+      We draft with AI. Specifically: we use Anthropic's Claude API, with web search, to research a
+      category and produce a first draft grounded in current published reviews. This is a small
+      independent site and that's how we cover ground.
+    </p>
+    <p>
+      Nothing publishes itself. Every draft lands in our CMS as an unpublished draft and a person reads
+      it before it goes live — checking that the products named are real and currently sold, that the
+      reasoning matches what the cited sources actually say, and that nothing has drifted into claims we
+      can't support. Drafts that don't survive that check get fixed or dropped.
+    </p>
+
+    <h2>What we don't do</h2>
+    <ul>
+      <li>
+        <strong>We don't test products.</strong> There's no lab, no test bench, no sample closet. When
+        you read that something "runs quiet" here, that's a finding from published testing, not from us
+        standing next to it with a decibel meter.
+      </li>
+      <li>
+        <strong>We don't quote prices.</strong> They change constantly and we can't verify them at the
+        moment you're reading. Check the retailer.
+      </li>
+      <li>
+        <strong>We don't take payment for placement.</strong> No brand has ever paid to appear on this
+        site, to be ranked higher, or to be named editor's pick. If that ever changes, it will be
+        labeled on the page.
+      </li>
+      <li>
+        <strong>We don't invent products or specs.</strong> Product names are the names they're sold
+        under. If we can't confirm a detail, it doesn't go in.
+      </li>
+    </ul>
+
+    <h2 id="how-we-make-money">How we make money</h2>
+    <p>
+      Shopping Sloth is an affiliate site. Some product links are affiliate links, and as an Amazon
+      Associate we earn from qualifying purchases made through them, at no extra cost to you. We also
+      run display advertising.
+    </p>
+    <p>
+      Commissions don't influence the rankings. The practical reason is simple: the commission rate is
+      roughly the same across the products we cover, so there's nothing to gain by steering you toward a
+      worse one — and a reader who buys something disappointing doesn't come back. Every article carries
+      this disclosure above its first affiliate link, not buried at the bottom.
+    </p>
+
+    <h2>Keeping things current</h2>
+    <p>
+      Product roundups go stale — models get discontinued, revised, or quietly made worse. Each article
+      shows when it was last updated. We revisit roundups as categories change, and when a pick is
+      discontinued we replace it rather than leaving a dead recommendation up.
+    </p>
+
+    <h2>Corrections</h2>
+    <p>
+      If something here is wrong — a product that no longer exists, a claim that doesn't match the
+      source, a broken link — tell us at
+      <a href="mailto:hello@shoppingsloth.com">hello@shoppingsloth.com</a> and we'll fix it and note the
+      update date on the article. We'd genuinely rather hear it than not.
+    </p>
+
+    <div class="quote" style="margin:56px 0;">
+      <p>"We move slow, but only toward the good stuff."</p>
+      <span>— shopping sloth</span>
+    </div>
+  </div>
+</BaseLayout>

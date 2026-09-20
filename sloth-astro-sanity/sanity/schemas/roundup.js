@@ -135,11 +135,40 @@ export default defineType({
                 'line under the blurb. Ignored in ranked roundups.',
             }),
             defineField({
+              name: 'keySpecs',
+              title: 'Key specs',
+              type: 'string',
+              description:
+                'Optional. The two or three numbers a buyer actually compares, as one line — e.g. ' +
+                '"7in display · 16GB · ~10 weeks battery · 211g". Only facts you can confirm from the ' +
+                'manufacturer or a cited review. Never prices (they go stale).',
+            }),
+            defineField({
+              name: 'bestFor',
+              title: 'Get it if',
+              type: 'string',
+              description:
+                'Optional. One clause naming the reader this suits, e.g. "you want the safest default ' +
+                'and don\'t want to think about it".',
+            }),
+            defineField({
+              name: 'skipIf',
+              title: 'Skip it if',
+              type: 'string',
+              description:
+                'Optional but valuable — a roundup that never says no to anything is not useful. One ' +
+                'clause naming who should not buy this, e.g. "you mostly borrow from the library".',
+            }),
+            defineField({
               name: 'image',
               title: 'Product image',
               type: 'image',
               options: {hotspot: true},
               fields: [defineField({name: 'alt', title: 'Alt text', type: 'string'})],
+              description:
+                'Per-product photo. The article drops the whole thumbnail column unless at least one ' +
+                'product here has one, so a half-filled roundup never shows empty tiles. Must depict ' +
+                'this exact product — stock photography of the category is not honest here.',
             }),
             defineField({
               name: 'affiliateUrl',
@@ -241,6 +270,59 @@ export default defineType({
       title: 'Closing pull quote',
       type: 'string',
       description: 'The dry sloth aside at the bottom of the article.',
+    }),
+    defineField({
+      name: 'sources',
+      title: 'Sources',
+      type: 'array',
+      description:
+        'The published reviews and testing writeups this roundup was built from, rendered as a ' +
+        '"what we read" list at the bottom of the article and as schema.org citations. The site ' +
+        'tells readers it does not test products and relies on published testing — this is the ' +
+        'evidence for that claim, so treat it as required for new roundups, not optional.',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'source',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+              description: 'e.g. "Wirecutter — The Best Air Purifier"',
+              validation: (R) => R.required(),
+            }),
+            defineField({name: 'url', title: 'URL', type: 'url', validation: (R) => R.required()}),
+          ],
+          preview: {select: {title: 'title', subtitle: 'url'}},
+        }),
+      ],
+    }),
+    defineField({
+      name: 'faqs',
+      title: 'Common questions',
+      type: 'array',
+      description:
+        'Optional. Three to five real questions a buyer in this category has, answered in two or ' +
+        'three sentences each. Rendered as an accordion and as FAQPage structured data. Answer ' +
+        'things the roundup itself does not already cover — not "which one is best?".',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'faq',
+          fields: [
+            defineField({name: 'question', title: 'Question', type: 'string', validation: (R) => R.required()}),
+            defineField({
+              name: 'answer',
+              title: 'Answer',
+              type: 'text',
+              rows: 3,
+              validation: (R) => R.required(),
+            }),
+          ],
+          preview: {select: {title: 'question', subtitle: 'answer'}},
+        }),
+      ],
     }),
   ],
   orderings: [

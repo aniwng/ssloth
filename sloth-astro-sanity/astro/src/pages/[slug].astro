@@ -4,7 +4,7 @@ import PawIcon from '../components/PawIcon.astro'
 import ProductImage from '../components/ProductImage.astro'
 import RoundupCard from '../components/RoundupCard.astro'
 import {getRoundups, introToHtml, introToPlainText, formatMonth, withAffiliateTag} from '../lib/roundups.js'
-import {AUTHOR} from '../lib/author.js'
+import {AUTHOR, AUTHOR_JSONLD} from '../lib/author.js'
 
 // ONE template for every roundup. New Sanity documents become new pages
 // automatically. If you ever find yourself creating article-2.astro, the
@@ -32,6 +32,22 @@ const meta = [updated && `updated ${updated}`, roundup.readingMinutes && `${roun
   .filter(Boolean)
   .join(' · ')
 
+// Drop the per-product photo column entirely unless this roundup actually has
+// photos — five empty placeholder tiles per article read as an unfinished
+// page. See .has-thumbs in style.css.
+const hasThumbs = products.some((product) => product.image)
+
+// Sources the draft was researched against. The generator has always collected
+// and validated these (scripts/lib/roundupSchema.js) but used to discard them
+// before writing to Sanity, so older documents won't have any yet.
+const sources = (roundup.sources ?? []).filter((s) => s?.url && s?.title)
+
+const faqs = (roundup.faqs ?? []).filter((f) => f?.question && f?.answer)
+
+// A ranked roundup carries affiliate links; an unranked guide doesn't, so it
+// doesn't need the disclosure banner.
+const hasAffiliateLinks = roundup.ranked !== false
+
 const publishedISO = roundup.publishedAt ? new Date(roundup.publishedAt).toISOString() : undefined
 const modifiedISO = roundup.updatedAt ? new Date(roundup.updatedAt).toISOString() : publishedISO
 const canonicalUrl = new URL(`/${roundup.slug}/`, Astro.site).toString()
@@ -45,10 +61,30 @@ const articleJsonLd = {
   image: absoluteImage,
   datePublished: publishedISO,
   dateModified: modifiedISO,
-  author: {'@type': 'Person', name: AUTHOR.name, url: new URL('/about/', Astro.site).toString()},
-  publisher: {'@type': 'Organization', name: 'Shopping Sloth'},
+  // An Organization, not a Person. The site used to declare a named human
+  // author who did not exist; asserting a fabricated Person in structured data
+  // is worse than asserting nothing. See src/lib/author.js.
+  author: {...AUTHOR_JSONLD, url: new URL('/how-we-pick/', Astro.site).toString()},
+  publisher: AUTHOR_JSONLD,
   mainEntityOfPage: canonicalUrl,
+  // Points crawlers at the editorial-standards page that describes how this
+  // article was produced, including the AI disclosure.
+  publishingPrinciples: new URL('/how-we-pick/', Astro.site).toString(),
+  ...(sources.length > 0 ? {citation: sources.map((s) => s.url)} : {}),
 }
+
+const faqJsonLd =
+  faqs.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {'@type': 'Answer', text: faq.answer},
+        })),
+      }
+    : undefined
 
 // Ranked roundups double as "best X" lists — Google and answer engines both
 // parse ItemList/Product markup for these directly, which is worth more here
@@ -91,14 +127,14 @@ const breadcrumbJsonLd = {
   description={description}
   image={roundup.heroImage}
   type="article"
-  jsonLd={[articleJsonLd, breadcrumbJsonLd, itemListJsonLd].filter(Boolean)}
+  jsonLd={[articleJsonLd, breadcrumbJsonLd, itemListJsonLd, faqJsonLd].filter(Boolean)}
 >
   <div class={`wrap cat-${roundup.category}`}>
     <div class="article-head">
       <span class={`tag ${roundup.category}`}>{roundup.category}</span>
       <h1>{roundup.title}</h1>
       <div class="article-meta">
-        by <a href="/about/#editor">{AUTHOR.name}</a>
+        by <a href="/how-we-pick/">{AUTHOR.name}</a>
         {meta && ` · ${meta}`}
       </div>
     </div>
@@ -110,14 +146,48 @@ const breadcrumbJsonLd = {
     <div class="intro" set:html={intro} />
 
     {
+      hasAffiliateLinks && (
+        // Above the first affiliate link, not below the last one — the FTC's
+        // endorsement guidance and ad-network review both expect the
+        // disclosure before the link it applies to.
+        <p class="disclosure-top">
+          <PawIcon size={13} />
+          <span>
+            <strong>How this article makes money:</strong> the "buy now" links below are affiliate
+            links, and as an Amazon Associate we earn from qualifying purchases — at no extra cost to
+            you. No brand pays to be listed or ranked here. We don't test products ourselves; picks come
+            from published reviews and testing{
+              /* Only promise the citation list on articles that actually have
+                 one — roundups published before the `sources` field existed
+                 don't yet, and a disclosure that overstates is worse than a
+                 shorter honest one. scripts/enrich-roundups.js backfills them. */
+              sources.length > 0 ? ', cited at the end of this article.' : '.'
+            }{' '}
+            <a href="/how-we-pick/">How we pick</a>.
+          </span>
+        </p>
+      )
+    }
+
+    {
       roundup.ranked !== false ? (
-        <div class={roundup.showRankNumbers === false ? 'rankings no-rank' : 'rankings'}>
+        <div
+          class={[
+            'rankings',
+            roundup.showRankNumbers === false && 'no-rank',
+            hasThumbs && 'has-thumbs',
+          ]
+            .filter(Boolean)
+            .join(' ')}
+        >
           {products.map((product) => (
             <div class={product.isEditorsPick ? 'entry pick' : 'entry'}>
               {roundup.showRankNumbers !== false && <div class="rank-num">{product.rank}</div>}
-              <div class="entry-thumb ph">
-                <ProductImage source={product.image} width={200} height={200} alt={product.name} />
-              </div>
+              {hasThumbs && (
+                <div class={product.image ? 'entry-thumb' : 'entry-thumb ph'}>
+                  <ProductImage source={product.image} width={200} height={200} alt={product.name} />
+                </div>
+              )}
               <div>
                 {product.isEditorsPick && (
                   <div class="pick-flag">
@@ -136,7 +206,30 @@ const breadcrumbJsonLd = {
               >
                 buy now
               </a>
-              <p class="entry-copy">{product.blurb}</p>
+              <div class="entry-copy">
+                <p>{product.blurb}</p>
+                {/* The fields below are what turn a paraphrased blurb into
+                    something a reader can actually decide from. They're
+                    optional: older documents predate them and render exactly
+                    as before. See sanity/schemas/roundup.js. */}
+                {product.keySpecs && <p class="entry-specs">{product.keySpecs}</p>}
+                {(product.bestFor || product.skipIf) && (
+                  <dl class="entry-fit">
+                    {product.bestFor && (
+                      <div>
+                        <dt>Get it if</dt>
+                        <dd>{product.bestFor}</dd>
+                      </div>
+                    )}
+                    {product.skipIf && (
+                      <div>
+                        <dt>Skip it if</dt>
+                        <dd>{product.skipIf}</dd>
+                      </div>
+                    )}
+                  </dl>
+                )}
+              </div>
             </div>
           ))}
         </div>
@@ -192,11 +285,49 @@ const breadcrumbJsonLd = {
     }
 
     {
+      faqs.length > 0 && (
+        <div class="faq">
+          <h2>common questions</h2>
+          {faqs.map((faq) => (
+            <details class="faq-item">
+              <summary>{faq.question}</summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      sources.length > 0 && (
+        // The reader-facing half of "we don't test, we read the people who
+        // do" — without this, that claim is unverifiable.
+        <div class="sources">
+          <h2>what we read</h2>
+          <p>
+            We don't test products ourselves. These are the published reviews and testing writeups this
+            roundup was built from, so you can check them directly.
+          </p>
+          <ol>
+            {sources.map((source) => (
+              <li>
+                <a href={source.url} target="_blank" rel="nofollow noopener">
+                  {source.title}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )
+    }
+
+    {
       roundup.ranked !== false && (
         <p class="disclosure">
           Some links above are affiliate links. If you buy through them we may earn a small commission,
           at no extra cost to you. Commissions never influence our picks. As an Amazon Associate we earn
-          from qualifying purchases.
+          from qualifying purchases. Read more about{' '}
+          <a href="/how-we-pick/">how we choose what to recommend</a>.
         </p>
       )
     }

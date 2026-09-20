@@ -1,6 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk'
-import {SYSTEM_PROMPT, buildUserPrompt} from './prompt.js'
-import {ROUNDUP_JSON_SCHEMA} from './roundupSchema.js'
+import {SYSTEM_PROMPT, buildUserPrompt, buildEnrichPrompt} from './prompt.js'
+import {ROUNDUP_JSON_SCHEMA, ENRICHMENT_JSON_SCHEMA} from './roundupSchema.js'
 
 const MODEL = process.env.SLOTH_MODEL || 'claude-opus-5'
 const EFFORT = process.env.SLOTH_EFFORT || 'high'
@@ -24,10 +24,29 @@ const client = new Anthropic() // reads ANTHROPIC_API_KEY, or an `ant auth login
  *   recommended fallback model inside the same call. Cheap insurance.
  */
 export async function draftRoundup({topic, category, slug}) {
-  let messages = [{role: 'user', content: buildUserPrompt({topic, category, slug, useWebSearch: USE_WEB_SEARCH})}]
+  return runTurn({
+    prompt: buildUserPrompt({topic, category, slug, useWebSearch: USE_WEB_SEARCH}),
+    schema: ROUNDUP_JSON_SCHEMA,
+  })
+}
+
+/**
+ * Adds sources, FAQs, and per-product "get it if / skip it if" to an article
+ * that already exists, without touching its picks or prose. Same turn
+ * mechanics as drafting — only the prompt and the response schema differ.
+ */
+export async function enrichRoundup(roundup) {
+  return runTurn({
+    prompt: buildEnrichPrompt({roundup, useWebSearch: USE_WEB_SEARCH}),
+    schema: ENRICHMENT_JSON_SCHEMA,
+  })
+}
+
+async function runTurn({prompt, schema}) {
+  let messages = [{role: 'user', content: prompt}]
 
   for (let resume = 0; resume <= MAX_PAUSE_RESUMES; resume++) {
-    const message = await requestWithFallbacks(messages)
+    const message = await requestWithFallbacks(messages, schema)
 
     if (message.stop_reason === 'refusal') {
       throw new Error(
@@ -52,7 +71,7 @@ export async function draftRoundup({topic, category, slug}) {
   throw new Error(`Still paused after ${MAX_PAUSE_RESUMES} resumes — giving up.`)
 }
 
-async function requestWithFallbacks(messages) {
+async function requestWithFallbacks(messages, schema) {
   const params = {
     model: MODEL,
     max_tokens: MAX_TOKENS,
@@ -63,7 +82,7 @@ async function requestWithFallbacks(messages) {
       : {}),
     output_config: {
       effort: EFFORT,
-      format: {type: 'json_schema', schema: ROUNDUP_JSON_SCHEMA},
+      format: {type: 'json_schema', schema},
     },
   }
 
